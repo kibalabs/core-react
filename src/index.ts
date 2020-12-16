@@ -1,3 +1,4 @@
+export * from './browserUtil';
 export * from './childrenUtil';
 export * from './errorBoundary';
 export * from './routing';

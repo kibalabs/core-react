@@ -24,7 +24,7 @@ export const useSize = <T extends HTMLElement>(node: T | null): ISize | null => 
     }
   };
 
-  React.useLayoutEffect(() => {
+  React.useLayoutEffect((): void => {
     measure();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [node]);
