@@ -8,6 +8,7 @@ export * from './useEventListener';
 export * from './useFavicon';
 export * from './useInitialization';
 export * from './useInterval';
+export * from './useIsomorphicLayoutEffect';
 export * from './useLocalStorageState';
 export * from './useRenderedRef';
 export * from './useScrollListener';
