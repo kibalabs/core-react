@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { useEventListener } from './useEventListener';
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 export interface ISize {
   width: number;
@@ -24,7 +26,7 @@ export const useSize = <T extends HTMLElement>(node: T | null): ISize | null => 
     }
   };
 
-  React.useLayoutEffect((): void => {
+  useIsomorphicLayoutEffect((): void => {
     measure();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [node]);

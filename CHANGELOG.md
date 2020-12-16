@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Add `react-is` dependency
 - [MINOR] Added optional `history` prop to router to allow external control (useful for testing and SSR)
 - [MINOR] Added `getIsRunningOnBrowser` function
+- [MINOR] Added `useIsomorphicLayoutEffect` to make life easy for SSR
 
 ### Changed
 
