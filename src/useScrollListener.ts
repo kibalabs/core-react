@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useEventListener } from './useEventListener';
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 export const useScrollListener = (element: HTMLElement | Document | Window | null, handler: (event: Event) => void): void => {
   //   const savedHandler = React.useRef<(event: Event) => void>(handler);
@@ -19,11 +20,11 @@ export const useScrollListener = (element: HTMLElement | Document | Window | nul
 // // export const useEventListener = (element: HTMLElement | Document | Window, eventName: string, handler: (event: Event) => void): void => {
 // //   const savedHandler = React.useRef<(event: Event) => void>(handler);
 
-// //   React.useEffect(() => {
+// //   React.useEffect((): void => {
 // //     savedHandler.current = handler;
 // //   }, [handler]);
 
-// //   React.useEffect(() => {
+// //   React.useEffect((): void => {
 // //     const eventListener = (event: Event): void => savedHandler.current(event);
 // //     element.addEventListener(eventName, eventListener);
 // //     return (): void => {
@@ -36,7 +37,7 @@ export const useScrollListenerRef = <T extends HTMLElement>(handler: (event: Eve
   const scrollingRef = React.useRef<T | null>(null);
   const [hasLaidOut, setHasLaidOut] = React.useState<boolean>(false);
 
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect((): void => {
     setHasLaidOut(true);
   });
 

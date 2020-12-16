@@ -53,7 +53,7 @@ export default class LocalStorageClient {
 export const useLocalStorageState = (name: string, overrideInitialValue?: string | null): [string | null, (newValue: string | null) => void] => {
   if (typeof window === 'undefined') {
     console.warn('Cannot use useLocalStorageState without a window present!')
-    return [null, () => {}];
+    return [null, (): void => {}];
   }
 
   const localStorage = new LocalStorageClient(window.localStorage);

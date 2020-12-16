@@ -79,10 +79,11 @@ export const Route = (props: IRouteProps): React.ReactElement => {
 
 export interface IRouterProps extends IMultiChildProps<IRouteProps<any>> {
   authManager?: IRouterAuthManager;
+  history?: IHistory;
 }
 
 export const Router = (props: IRouterProps): React.ReactElement => {
-  const historyRef = React.useRef(createReachHistory(window));
+  const historyRef = React.useRef(props.history || createReachHistory(window));
   return (
     <HistoryProvider history={historyRef.current}>
       <RouterAuthManagerContext.Provider value={props.authManager}>
