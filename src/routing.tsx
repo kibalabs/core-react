@@ -40,18 +40,25 @@ export const useRouterAuthManager = (): IRouterAuthManager => {
   return authManager;
 }
 
-export interface IRouteProps<PagePropsType = {}> {
+export interface IRouteProps<PagePropsType = Record<string, any>> {
   path?: string;
   default?: boolean;
   uri?: string;
   redirectIfAuth?: string;
   redirectIfNoAuth?: string;
-  page: React.ComponentType<PagePropsType>;
+  page?: React.ComponentType<PagePropsType>;
+  pageElement?: React.ComponentClass<PagePropsType>;
 }
 
 export const Route = (props: IRouteProps): React.ReactElement => {
   const params = useReachParams();
   const authManager = useRouterAuthManager();
+  if (!props.page && !props.pageElement) {
+    throw new Error('One of {page, pageElement} must be passed into each Route');
+  }
+  if (props.page && props.pageElement) {
+    throw new Error('Only ONE of {page, pageElement} must be passed into each Route');
+  }
   if (props.redirectIfNoAuth) {
     if (!authManager) {
       throw new Error('Cannot use redirectIfNoAuth since an authManager has not ben provided to the router');
@@ -72,7 +79,8 @@ export const Route = (props: IRouteProps): React.ReactElement => {
   }
   return (
     <ErrorBoundary>
-      <props.page {...params} />
+      {props.page && <props.page {...params} />}
+      {props.pageElement && React.cloneElement(props.pageElement, params)}
     </ErrorBoundary>
   );
 }
