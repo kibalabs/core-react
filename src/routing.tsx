@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router as ReachRouter, LocationProvider as ReachLocationProvider, useParams as useReachParams, Redirect as ReachRedirect, History as ReachHistory, Link as ReachLink, createHistory as createReachHistory } from '@reach/router'
+import { Router as ReachRouter, LocationProvider as ReachLocationProvider, useParams as useReachParams, Redirect as ReachRedirect, History as ReachHistory, Link as ReachLink, createHistory as createReachHistory, createMemorySource as createReachMemorySource} from '@reach/router'
 
 import { ErrorBoundary } from './errorBoundary';
 import { IMultiChildProps } from './parentComponentProps';
@@ -64,7 +64,7 @@ export const Route = (props: IRouteProps): React.ReactElement => {
       throw new Error('Cannot use redirectIfNoAuth since an authManager has not ben provided to the router');
     }
     if (!authManager.getIsUserLoggedIn()) {
-      // TODO(krish): using history.navigate would be prefereable here but it didnt work, figure out why
+      // TODO(krish): using history.navigate would be preferable here but it didn't work, figure out why
       return <ReachRedirect noThrow to={props.redirectIfNoAuth} />;
     }
   }
@@ -73,7 +73,7 @@ export const Route = (props: IRouteProps): React.ReactElement => {
       throw new Error('Cannot use redirectIfAuth since an authManager has not ben provided to the router');
     }
     if (authManager.getIsUserLoggedIn()) {
-      // TODO(krish): using history.navigate would be prefereable here but it didnt work, figure out why
+      // TODO(krish): using history.navigate would be preferable here but it didn't work, figure out why
       return <ReachRedirect noThrow to={props.redirectIfAuth} />;
     }
   }
@@ -112,4 +112,8 @@ export const Link = (props: ILinkProps): React.ReactElement => {
   return (
     <ReachLink to={props.target}>{props.text}</ReachLink>
   )
+}
+
+export const createStaticHistory = (path: string) => {
+  return createReachHistory(createReachMemorySource(path));
 }
