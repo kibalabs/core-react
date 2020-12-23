@@ -16,7 +16,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Added `routing.createStaticHistory` to create a static history (useful for testing and SSR)
 - [MINOR] Added `pageElement` prop to `Route` to allow using an instantiated page element
 
-
 ### Changed
 
 ### Removed
