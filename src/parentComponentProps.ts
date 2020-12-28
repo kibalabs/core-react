@@ -9,9 +9,13 @@ export interface IMultiChildProps<PropsType> {
 }
 
 export interface ISingleAnyChildProps {
-  children: React.ReactChild;
+  children: React.ReactNode;
+}
+
+export interface IOptionalSingleAnyChildProps {
+  children?: React.ReactNode;
 }
 
 export interface IMultiAnyChildProps {
-  children?: React.ReactChild | React.ReactChild[];
+  children?: React.ReactNode | React.ReactNode[];
 }
