@@ -13,6 +13,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Removed
 
+## [0.5.3]
+
+### Added
+- [MINOR] Added `IOptionalSingleAnyChildProps`
+
+### Changed
+- [MINOR] Made `ISingleAnyChildProps` and `IMultiAnyChildProps` accept `React.ReactNode`
+
+### Removed
+
 ## [0.5.2]
 
 ### Added
