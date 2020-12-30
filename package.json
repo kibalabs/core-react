@@ -12,7 +12,11 @@
   "scripts": {
     "build": "build-react-component",
     "start": "build-react-component --start",
-    "start-dev": "build-react-component --start --dev"
+    "start-dev": "build-react-component --start --dev",
+    "clean": "rm -rf ./node_modules ./package-lock.json ./dist",
+    "lint": "lint --config-modifier ./eslintrc-modifier.js",
+    "lint-fix": "lint --fix",
+    "type-check": "type-check"
   },
   "files": [
     "dist/*"
