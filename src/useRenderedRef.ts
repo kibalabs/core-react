@@ -9,4 +9,4 @@ export const useRenderedRef = <T extends HTMLElement>(): [React.RefObject<T>, bo
     setHasRendered(true);
   });
   return [ref, hasRendered];
-}
+};

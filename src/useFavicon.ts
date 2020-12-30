@@ -9,8 +9,9 @@ export const useFavicon = (href: string): void => {
       linkElements.push(newLinkElement);
     }
     linkElements.forEach((linkElement: HTMLLinkElement): void => {
-      linkElement.rel = 'icon';
-      linkElement.href = href;
+      const element = linkElement;
+      element.rel = 'icon';
+      element.href = href;
     });
   }, [href]);
 };

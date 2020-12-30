@@ -1,10 +1,11 @@
 import React from 'react';
-import { integerToString, integerFromString } from '@kibalabs/core';
+
+import { integerFromString, integerToString } from '@kibalabs/core';
 
 export const useUrlQueryState = (name: string, overrideInitialValue?: string | null): [string | null | undefined, (newValue: string | null | undefined) => void] => {
   if (typeof window === 'undefined') {
-    console.warn('Cannot use useUrlQueryState without a window present!')
-    return [null, (): void => {}];
+    console.warn('Cannot use useUrlQueryState without a window present!');
+    return [null, (): void => undefined];
   }
 
   const [value, setValue] = React.useState<string | undefined>((): string | undefined => {

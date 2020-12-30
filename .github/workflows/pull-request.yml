@@ -24,7 +24,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         json-file-path: ./linting-results.json
-        check-name: type-package
+        check-name: lint-package
         fail-on-error: false
     - name: Run typing
       run: |

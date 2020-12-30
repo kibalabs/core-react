@@ -7,14 +7,14 @@ export const useEventListener = (element: HTMLElement | Document | Window | null
     savedHandler.current = handler;
   }, [handler]);
 
-  React.useEffect((): (() => void) => {
+  React.useEffect((): void | (() => void) => {
     if (!element) {
       return;
     }
     const eventListener = (event: Event): void => savedHandler.current(event);
     element.addEventListener(eventName, eventListener);
-    return (): void => {
+    return ((): void => {
       element.removeEventListener(eventName, eventListener);
-    };
+    });
   }, [eventName, element]);
 };

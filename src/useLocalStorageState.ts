@@ -1,5 +1,6 @@
 import React from 'react';
-import { objectToString, objectFromString, booleanToString, booleanFromString, stringListToString, stringListFromString } from '@kibalabs/core';
+
+import { booleanFromString, booleanToString, objectFromString, objectToString, stringListFromString, stringListToString } from '@kibalabs/core';
 
 import { useValueSync } from './useValueSync';
 
@@ -52,8 +53,8 @@ export default class LocalStorageClient {
 
 export const useLocalStorageState = (name: string, overrideInitialValue?: string | null): [string | null, (newValue: string | null) => void] => {
   if (typeof window === 'undefined') {
-    console.warn('Cannot use useLocalStorageState without a window present!')
-    return [null, (): void => {}];
+    console.warn('Cannot use useLocalStorageState without a window present!');
+    return [null, (): void => undefined];
   }
 
   const localStorage = new LocalStorageClient(window.localStorage);
@@ -77,14 +78,14 @@ export const useBooleanLocalStorageState = (name: string, overrideInitialValue?:
   return [booleanFromString(value) as boolean | null, ((newValue: boolean | null): void => setValue(booleanToString(newValue) as string | null))];
 };
 
-export const useObjectLocalStorageState = (name: string, overrideInitialValue?: object): [object | null, (newValue: object | null) => void] => {
+export const useObjectLocalStorageState = (name: string, overrideInitialValue?: Record<string, unknown>): [Record<string, unknown> | null, (newValue: Record<string, unknown> | null) => void] => {
   const [value, setValue] = useLocalStorageState(name, objectToString(overrideInitialValue));
-  const [objectValue, setObjectValue] = React.useState<object | null>(objectFromString(value));
-  useValueSync(objectValue, ((newValue: object | null): void => setValue(objectToString(newValue) as string | null)));
+  const [objectValue, setObjectValue] = React.useState<Record<string, unknown> | null>(objectFromString(value));
+  useValueSync(objectValue, ((newValue: Record<string, unknown> | null): void => setValue(objectToString(newValue) as string | null)));
   return [objectValue, setObjectValue];
 };
 
-export const useStringListLocalStorageState = (name: string, delimiter: string = ',', overrideInitialValue?: string[] | null): [string[] | null, (newValue: string[] | null) => void] => {
+export const useStringListLocalStorageState = (name: string, delimiter = ',', overrideInitialValue?: string[] | null): [string[] | null, (newValue: string[] | null) => void] => {
   const [value, setValue] = useLocalStorageState(name, stringListToString(overrideInitialValue));
   return [stringListFromString(value, delimiter) as string[] | null, ((newValue: string[] | null): void => setValue(stringListToString(newValue, delimiter) as string | null))];
 };

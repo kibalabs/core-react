@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styled from 'styled-components';
 
 interface IErrorBoundaryState {
@@ -57,7 +58,7 @@ export class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBo
   }
 
   public reset = (): void => {
-    this.setState({ hasError: false, error: null, info: null })
+    this.setState({ hasError: false, error: null, info: null });
   }
 
   public render(): React.ReactElement {
@@ -67,11 +68,11 @@ export class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBo
           <ErrorMessage>
             <strong>Ooops 🤦‍♂️</strong>
             <br/>
-            <strong>Something's not right here. Check the error below or hit us up for help</strong>
+            <strong>Something is not right here. Check the error below or hit us up for help</strong>
             <br/>
             <br/>
             {this.state.error ? String(this.state.error) : ''}
-            {this.state.info ? this.state.info['componentStack'].split('\n').slice(0, 10).map((message: string, index: number): React.ReactElement => <span key={index}>{message}<br/></span>) : ''}
+            {this.state.info ? this.state.info.componentStack.split('\n').slice(0, 10).map((message: string, index: number): React.ReactElement => <span key={index}>{message}<br/></span>) : ''}
             <br/>
             <ResetButton onClick={this.reset}>Reset</ResetButton>
           </ErrorMessage>

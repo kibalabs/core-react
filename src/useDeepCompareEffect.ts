@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { deepCompare } from '@kibalabs/core';
 
 export const useDeepCompareRef = <T>(value: T): T => {
@@ -7,8 +8,8 @@ export const useDeepCompareRef = <T>(value: T): T => {
     ref.current = value;
   }
   return ref.current;
-}
+};
 
-export const useDeepCompareEffect = (callback: () => void, dependencies: any[]): void => {
-  React.useEffect(callback, useDeepCompareRef(dependencies));
-}
+export const useDeepCompareEffect = (callback: () => void, dependencies: unknown[]): void => {
+  React.useEffect(callback, [callback, ...useDeepCompareRef(dependencies)]);
+};
