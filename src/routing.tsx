@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { createHistory as createReachHistory, createMemorySource as createReachMemorySource, History as ReachHistory, Link as ReachLink, LocationProvider as ReachLocationProvider, Redirect as ReachRedirect, Router as ReachRouter, useParams as useReachParams } from '@reach/router';
+import { createHistory as createReachHistory, createMemorySource as createReachMemorySource, History as ReachHistory, Link as ReachLink, LocationProvider as ReachLocationProvider, Redirect as ReachRedirect, Router as ReachRouter, useParams as useReachParams, HistorySource as ReachHistorySource } from '@reach/router';
 
 import { ErrorBoundary } from './errorBoundary';
 import { IMultiChildProps } from './parentComponentProps';
@@ -36,7 +36,7 @@ export interface IRouterAuthManager {
 
 export const RouterAuthManagerContext = React.createContext<IRouterAuthManager | undefined>(undefined);
 
-export const useRouterAuthManager = (): IRouterAuthManager => {
+export const useRouterAuthManager = (): IRouterAuthManager | undefined => {
   const authManager = React.useContext(RouterAuthManagerContext);
   return authManager;
 };
@@ -48,7 +48,7 @@ export interface IRouteProps<PagePropsType = Record<string, unknown>> {
   redirectIfAuth?: string;
   redirectIfNoAuth?: string;
   page?: React.ComponentType<PagePropsType>;
-  pageElement?: React.ComponentClass<PagePropsType>;
+  pageElement?: React.ReactElement<PagePropsType>;
 }
 
 export const Route = (props: IRouteProps): React.ReactElement => {
@@ -92,7 +92,7 @@ export interface IRouterProps extends IMultiChildProps<IRouteProps<unknown>> {
 }
 
 export const Router = (props: IRouterProps): React.ReactElement => {
-  const historyRef = React.useRef(props.history || createReachHistory(window));
+  const historyRef = React.useRef(props.history || createReachHistory(window as unknown as ReachHistorySource));
   return (
     <HistoryProvider history={historyRef.current}>
       <RouterAuthManagerContext.Provider value={props.authManager}>

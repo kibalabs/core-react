@@ -13,8 +13,10 @@ export const useEventListener = (element: HTMLElement | Document | Window | null
     }
     const eventListener = (event: Event): void => savedHandler.current(event);
     element.addEventListener(eventName, eventListener);
-    return ((): void => {
+    // TODO(krishan711): figure out why this lint disable is needed!
+    // eslint-disable-next-line consistent-return
+    return (): void => {
       element.removeEventListener(eventName, eventListener);
-    });
+    };
   }, [eventName, element]);
 };
