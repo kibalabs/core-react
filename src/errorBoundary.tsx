@@ -14,12 +14,12 @@ const errorStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  flexDirection: 'column' as 'column',
+  flexDirection: 'column' as const,
   color: 'rgb(69, 69, 69)',
 };
 
 const errorMessageStyle = {
-  textAlign: 'center' as 'center',
+  textAlign: 'center' as const,
   margin: '1em',
   lineHeight: '1.5em',
 };

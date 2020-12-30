@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { createHistory as createReachHistory, createMemorySource as createReachMemorySource, History as ReachHistory, Link as ReachLink, LocationProvider as ReachLocationProvider, Redirect as ReachRedirect, Router as ReachRouter, useParams as useReachParams, HistorySource as ReachHistorySource } from '@reach/router';
+import { createHistory as createReachHistory, createMemorySource as createReachMemorySource, History as ReachHistory, HistorySource as ReachHistorySource, Link as ReachLink, LocationProvider as ReachLocationProvider, Redirect as ReachRedirect, Router as ReachRouter, useParams as useReachParams } from '@reach/router';
 
 import { ErrorBoundary } from './errorBoundary';
 import { IMultiChildProps } from './parentComponentProps';
