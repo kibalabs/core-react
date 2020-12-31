@@ -13,7 +13,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Removed
 
-## [0.5.3]
+## [0.5.4] - 2020-12-31
+
+### Added
+
+### Changed
+- [MINOR] Corrected typings
+
+### Removed
+
+## [0.5.3] - 2020-12-28
 
 ### Added
 - [MINOR] Added `IOptionalSingleAnyChildProps`
@@ -23,7 +32,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Removed
 
-## [0.5.2]
+## [0.5.2] - 2020-12-23
 
 ### Added
 - [MINOR] Updated react requirement to >=16.9 to allow for react 17
@@ -34,7 +43,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Removed
 
-## [0.5.1]
+## [0.5.1] - 2020-12-16
 
 ### Added
 - [MINOR] Added `react-is` dependency
