@@ -13,9 +13,6 @@ jobs:
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
-    - name: Exit if the branch is tagged with v*
-      if: endsWith(github.ref, 'master') == false
-      run: exit -1
     - name: Build docker image
       run: docker build --tag $DOCKER_IMAGE .
     - name: Run linting
