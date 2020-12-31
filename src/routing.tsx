@@ -1,5 +1,6 @@
 import React from 'react';
-import { Router as ReachRouter, LocationProvider as ReachLocationProvider, useParams as useReachParams, Redirect as ReachRedirect, History as ReachHistory, Link as ReachLink, createHistory as createReachHistory, createMemorySource as createReachMemorySource} from '@reach/router'
+
+import { createHistory as createReachHistory, createMemorySource as createReachMemorySource, History as ReachHistory, HistorySource as ReachHistorySource, Link as ReachLink, LocationProvider as ReachLocationProvider, Redirect as ReachRedirect, Router as ReachRouter, useParams as useReachParams } from '@reach/router';
 
 import { ErrorBoundary } from './errorBoundary';
 import { IMultiChildProps } from './parentComponentProps';
@@ -24,10 +25,10 @@ export const HistoryProvider = (props: IHistoryProviderProps): React.ReactElemen
 export const useHistory = (): IHistory => {
   const history = React.useContext(HistoryContext);
   if (!history) {
-    throw new Error('Cannot use useHistory since HistoryContext has not ben provided')
+    throw new Error('Cannot use useHistory since HistoryContext has not ben provided');
   }
   return history;
-}
+};
 
 export interface IRouterAuthManager {
   getIsUserLoggedIn: () => boolean;
@@ -35,19 +36,19 @@ export interface IRouterAuthManager {
 
 export const RouterAuthManagerContext = React.createContext<IRouterAuthManager | undefined>(undefined);
 
-export const useRouterAuthManager = (): IRouterAuthManager => {
+export const useRouterAuthManager = (): IRouterAuthManager | undefined => {
   const authManager = React.useContext(RouterAuthManagerContext);
   return authManager;
-}
+};
 
-export interface IRouteProps<PagePropsType = Record<string, any>> {
+export interface IRouteProps<PagePropsType = Record<string, unknown>> {
   path?: string;
   default?: boolean;
   uri?: string;
   redirectIfAuth?: string;
   redirectIfNoAuth?: string;
   page?: React.ComponentType<PagePropsType>;
-  pageElement?: React.ComponentClass<PagePropsType>;
+  pageElement?: React.ReactElement<PagePropsType>;
 }
 
 export const Route = (props: IRouteProps): React.ReactElement => {
@@ -83,25 +84,25 @@ export const Route = (props: IRouteProps): React.ReactElement => {
       {props.pageElement && React.cloneElement(props.pageElement, params)}
     </ErrorBoundary>
   );
-}
+};
 
-export interface IRouterProps extends IMultiChildProps<IRouteProps<any>> {
+export interface IRouterProps extends IMultiChildProps<IRouteProps<unknown>> {
   authManager?: IRouterAuthManager;
   history?: IHistory;
 }
 
 export const Router = (props: IRouterProps): React.ReactElement => {
-  const historyRef = React.useRef(props.history || createReachHistory(window));
+  const historyRef = React.useRef(props.history || createReachHistory(window as unknown as ReachHistorySource));
   return (
     <HistoryProvider history={historyRef.current}>
       <RouterAuthManagerContext.Provider value={props.authManager}>
-        <ReachRouter style={{width: '100%', height: '100%'}}>
+        <ReachRouter style={{ width: '100%', height: '100%' }}>
           { props.children }
         </ReachRouter>
       </RouterAuthManagerContext.Provider>
     </HistoryProvider>
-  )
-}
+  );
+};
 
 export interface ILinkProps {
   target: string;
@@ -111,9 +112,9 @@ export interface ILinkProps {
 export const Link = (props: ILinkProps): React.ReactElement => {
   return (
     <ReachLink to={props.target}>{props.text}</ReachLink>
-  )
-}
+  );
+};
 
-export const createStaticHistory = (path: string) => {
+export const createStaticHistory = (path: string): IHistory => {
   return createReachHistory(createReachMemorySource(path));
-}
+};

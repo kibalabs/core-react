@@ -7,12 +7,14 @@ export const useEventListener = (element: HTMLElement | Document | Window | null
     savedHandler.current = handler;
   }, [handler]);
 
-  React.useEffect((): (() => void) => {
+  React.useEffect((): void | (() => void) => {
     if (!element) {
       return;
     }
     const eventListener = (event: Event): void => savedHandler.current(event);
     element.addEventListener(eventName, eventListener);
+    // TODO(krishan711): figure out why this lint disable is needed!
+    // eslint-disable-next-line consistent-return
     return (): void => {
       element.removeEventListener(eventName, eventListener);
     };

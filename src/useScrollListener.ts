@@ -6,16 +6,16 @@ import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 export const useScrollListener = (element: HTMLElement | Document | Window | null, handler: (event: Event) => void): void => {
   //   const savedHandler = React.useRef<(event: Event) => void>(handler);
 
-//   const onScroll = (): void => {
-//     if (node) {
-//       window.requestAnimationFrame((): void => {
-//         setSize({ width: node.clientWidth, height: node.clientHeight, scrollHeight: node.scrollHeight, scrollWidth: node.scrollWidth });
-//       });
-//     }
-//   };
+  //   const onScroll = (): void => {
+  //     if (node) {
+  //       window.requestAnimationFrame((): void => {
+  //         setSize({ width: node.clientWidth, height: node.clientHeight, scrollHeight: node.scrollHeight, scrollWidth: node.scrollWidth });
+  //       });
+  //     }
+  //   };
 
   useEventListener(element, 'scroll', handler);
-}
+};
 
 // // export const useEventListener = (element: HTMLElement | Document | Window, eventName: string, handler: (event: Event) => void): void => {
 // //   const savedHandler = React.useRef<(event: Event) => void>(handler);
@@ -35,6 +35,7 @@ export const useScrollListener = (element: HTMLElement | Document | Window | nul
 
 export const useScrollListenerRef = <T extends HTMLElement>(handler: (event: Event) => void): React.RefObject<T> => {
   const scrollingRef = React.useRef<T | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [hasLaidOut, setHasLaidOut] = React.useState<boolean>(false);
 
   useIsomorphicLayoutEffect((): void => {
@@ -45,8 +46,8 @@ export const useScrollListenerRef = <T extends HTMLElement>(handler: (event: Eve
   // console.log('here', scrollingRef.current);
   // if (scrollingRef.current) {
   //   console.log('creating listener');
-    useScrollListener(scrollingRef.current, handler);
+  useScrollListener(scrollingRef.current, handler);
   // }
 
   return scrollingRef;
-}
+};
