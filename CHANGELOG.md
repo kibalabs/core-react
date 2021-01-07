@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MINOR] Added `propsUtil` with a few methods and exceptions to make life easy for component writers
+- [MINOR] Created `IOptionalSingleChildProps` to allow components to require an optional single child prop
+- [MINOR] Created `OptionalProppedElement` to allow children from `IMultiChildProps` and `IOptionalSingleChildProps` to accept false values
 
 ### Changed
 
