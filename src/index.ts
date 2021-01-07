@@ -3,6 +3,7 @@ export * from './childrenUtil';
 export * from './errorBoundary';
 export * from './routing';
 export * from './parentComponentProps';
+export * from './propsUtil';
 export * from './useDeepCompareEffect';
 export * from './useEventListener';
 export * from './useFavicon';
