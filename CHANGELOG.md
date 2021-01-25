@@ -8,10 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MAJOR] Added `useNavigator` for routing
 
 ### Changed
+- [MAJOR] Upgrade from @reach/router to react-router v6
 
 ### Removed
+- [MAJOR] Removed `useHistory` for routing
 
 ## [0.5.5] - 2021-01-07
 
