@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Routes, Route as ReactRoute, useNavigate, useParams as useRouterParams } from 'react-router';
+import { Route as ReactRoute, Routes, useNavigate, useParams as useRouterParams } from 'react-router';
 import { BrowserRouter, Link as ReactLink } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 
@@ -17,9 +17,9 @@ export const useNavigator = (): Navigator => {
     reactNavigate(target, { replace: shouldReplace, state: undefined });
   }, [reactNavigate]);
   return {
-    navigateTo: navigateTo,
+    navigateTo,
   };
-}
+};
 
 export interface IRouterAuthManager {
   getIsUserLoggedIn: () => boolean;
@@ -41,7 +41,7 @@ export interface IRouteProps<PagePropsType = Record<string, unknown>> {
   pageElement?: React.ReactElement<PagePropsType>;
 }
 
-export const Route = (props: IRouteProps): React.ReactElement => {
+export const Route = (props: IRouteProps): React.ReactElement | null => {
   const params = useRouterParams();
   const authManager = useRouterAuthManager();
   const navigator = useNavigator();
@@ -116,7 +116,7 @@ export const Router = (props: IRouterProps): React.ReactElement => {
       {internals}
     </BrowserRouter>
   );
-}
+};
 
 export interface ILinkProps {
   target: string;
