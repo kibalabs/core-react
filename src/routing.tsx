@@ -1,34 +1,25 @@
 import React from 'react';
 
-import { createHistory as createReachHistory, createMemorySource as createReachMemorySource, History as ReachHistory, HistorySource as ReachHistorySource, Link as ReachLink, LocationProvider as ReachLocationProvider, Redirect as ReachRedirect, Router as ReachRouter, useParams as useReachParams } from '@reach/router';
+import { Routes, Route as ReactRoute, useNavigate, useParams as useRouterParams } from 'react-router';
+import { BrowserRouter, Link as ReactLink } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
 
 import { ErrorBoundary } from './errorBoundary';
 import { IMultiChildProps } from './parentComponentProps';
 
-export type IHistory = ReachHistory;
-
-export const HistoryContext = React.createContext<IHistory | null>(null);
-
-interface IHistoryProviderProps {
-  history: IHistory;
-  children: React.ReactChild;
+export interface Navigator {
+  navigateTo: (target: string, shouldReplace?: boolean) => void;
 }
 
-export const HistoryProvider = (props: IHistoryProviderProps): React.ReactElement => (
-  <HistoryContext.Provider value={props.history}>
-    <ReachLocationProvider history={props.history}>
-      {props.children}
-    </ReachLocationProvider>
-  </HistoryContext.Provider>
-);
-
-export const useHistory = (): IHistory => {
-  const history = React.useContext(HistoryContext);
-  if (!history) {
-    throw new Error('Cannot use useHistory since HistoryContext has not ben provided');
-  }
-  return history;
-};
+export const useNavigator = (): Navigator => {
+  const reactNavigate = useNavigate();
+  const navigateTo = React.useCallback((target: string, shouldReplace?: boolean): void => {
+    reactNavigate(target, { replace: shouldReplace, state: undefined });
+  }, [reactNavigate]);
+  return {
+    navigateTo: navigateTo,
+  };
+}
 
 export interface IRouterAuthManager {
   getIsUserLoggedIn: () => boolean;
@@ -44,7 +35,6 @@ export const useRouterAuthManager = (): IRouterAuthManager | undefined => {
 export interface IRouteProps<PagePropsType = Record<string, unknown>> {
   path?: string;
   default?: boolean;
-  uri?: string;
   redirectIfAuth?: string;
   redirectIfNoAuth?: string;
   page?: React.ComponentType<PagePropsType>;
@@ -52,8 +42,9 @@ export interface IRouteProps<PagePropsType = Record<string, unknown>> {
 }
 
 export const Route = (props: IRouteProps): React.ReactElement => {
-  const params = useReachParams();
+  const params = useRouterParams();
   const authManager = useRouterAuthManager();
+  const navigator = useNavigator();
   if (!props.page && !props.pageElement) {
     throw new Error('One of {page, pageElement} must be passed into each Route');
   }
@@ -65,8 +56,8 @@ export const Route = (props: IRouteProps): React.ReactElement => {
       throw new Error('Cannot use redirectIfNoAuth since an authManager has not ben provided to the router');
     }
     if (!authManager.getIsUserLoggedIn()) {
-      // TODO(krish): using history.navigate would be preferable here but it didn't work, figure out why
-      return <ReachRedirect noThrow to={props.redirectIfNoAuth} />;
+      navigator.navigateTo(props.redirectIfNoAuth);
+      return null;
     }
   }
   if (props.redirectIfAuth) {
@@ -74,35 +65,58 @@ export const Route = (props: IRouteProps): React.ReactElement => {
       throw new Error('Cannot use redirectIfAuth since an authManager has not ben provided to the router');
     }
     if (authManager.getIsUserLoggedIn()) {
-      // TODO(krish): using history.navigate would be preferable here but it didn't work, figure out why
-      return <ReachRedirect noThrow to={props.redirectIfAuth} />;
+      navigator.navigateTo(props.redirectIfAuth);
+      return null;
     }
   }
+
   return (
-    <ErrorBoundary>
-      {props.page && <props.page {...params} />}
-      {props.pageElement && React.cloneElement(props.pageElement, params)}
-    </ErrorBoundary>
+    <ReactRoute
+      path={props.default ? '*' : props.path}
+      element={(
+        <ErrorBoundary>
+          {props.page && <props.page {...params} />}
+          {props.pageElement && React.cloneElement(props.pageElement, params)}
+        </ErrorBoundary>
+      )}
+    />
   );
 };
 
-export interface IRouterProps extends IMultiChildProps<IRouteProps<unknown>> {
+export interface ISubRouterProps extends IMultiChildProps<IRouteProps<unknown>> {
+}
+
+export const SubRouter = (props: ISubRouterProps): React.ReactElement => {
+  return (
+    <Routes>
+      { props.children }
+    </Routes>
+  );
+};
+
+export interface IRouterProps extends ISubRouterProps {
   authManager?: IRouterAuthManager;
-  history?: IHistory;
+  staticPath?: string;
 }
 
 export const Router = (props: IRouterProps): React.ReactElement => {
-  const historyRef = React.useRef(props.history || createReachHistory(window as unknown as ReachHistorySource));
-  return (
-    <HistoryProvider history={historyRef.current}>
-      <RouterAuthManagerContext.Provider value={props.authManager}>
-        <ReachRouter style={{ width: '100%', height: '100%' }}>
-          { props.children }
-        </ReachRouter>
-      </RouterAuthManagerContext.Provider>
-    </HistoryProvider>
+  const internals = (
+    <RouterAuthManagerContext.Provider value={props.authManager}>
+      <SubRouter {...props}>
+        { props.children }
+      </SubRouter>
+    </RouterAuthManagerContext.Provider>
   );
-};
+  return props.staticPath ? (
+    <StaticRouter location={props.staticPath}>
+      {internals}
+    </StaticRouter>
+  ) : (
+    <BrowserRouter>
+      {internals}
+    </BrowserRouter>
+  );
+}
 
 export interface ILinkProps {
   target: string;
@@ -111,10 +125,6 @@ export interface ILinkProps {
 
 export const Link = (props: ILinkProps): React.ReactElement => {
   return (
-    <ReachLink to={props.target}>{props.text}</ReachLink>
+    <ReactLink to={props.target}>{props.text}</ReactLink>
   );
-};
-
-export const createStaticHistory = (path: string): IHistory => {
-  return createReachHistory(createReachMemorySource(path));
 };
