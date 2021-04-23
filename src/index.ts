@@ -15,5 +15,6 @@ export * from './useLocalStorageState';
 export * from './useRenderedRef';
 export * from './useScrollListener';
 export * from './useSize';
+export * from './useWindowSize';
 export * from './useUrlQueryState';
 export * from './useValueSync';
