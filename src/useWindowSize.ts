@@ -14,7 +14,6 @@ export const useWindowSize = (): WindowSize => {
   });
 
   const onWindowResized = React.useCallback((): void => {
-    // Set window width/height to state
     setWindowSize({
       width: window.innerWidth,
       height: window.innerHeight,

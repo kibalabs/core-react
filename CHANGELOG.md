@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Added
 - [MINOR] Added `useDebouncedCallback` for handling frequent state changes
-- [MAJOR] Added `useWindowSize` for auto resizing window
+- [MAJOR] Added `useWindowSize` for tracking window size
 
 ### Changed
 
