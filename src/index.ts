@@ -12,6 +12,7 @@ export * from './useInitialization';
 export * from './useInterval';
 export * from './useIsomorphicLayoutEffect';
 export * from './useLocalStorageState';
+export * from './usePreviousValue';
 export * from './useRenderedRef';
 export * from './useScrollListener';
 export * from './useSize';
