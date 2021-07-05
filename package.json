@@ -33,7 +33,7 @@
     "react-is": "^17.0.1"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.6.4",
+    "@kibalabs/build": "0.6.5-next.9",
     "@types/react": "17.0.0",
     "@types/react-is": "17.0.0",
     "react": "17.0.1",
