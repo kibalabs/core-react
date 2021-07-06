@@ -26,14 +26,14 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "dependencies": {
-    "@kibalabs/core": "^0.5.3",
+    "@kibalabs/core": "0.5.4-next.1",
     "history": "^5.0.0",
     "react-router": "v6.0.0-beta.0",
     "react-router-dom": "v6.0.0-beta.0",
     "react-is": "^17.0.1"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.6.5-next.9",
+    "@kibalabs/build": "0.6.5-next.10",
     "@types/react": "17.0.0",
     "@types/react-is": "17.0.0",
     "react": "17.0.1",
