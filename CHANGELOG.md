@@ -8,8 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MINOR] Added `useLocation`
+- [MINOR] Added `SubRouteOutlet` to render sub-routes within a route
 
 ### Changed
+- [MINOR] Fixes for routing types
 
 ### Removed
 
