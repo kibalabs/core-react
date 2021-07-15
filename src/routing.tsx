@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Route as ReactRoute, Routes, useNavigate, useParams as useRouterParams } from 'react-router';
+import { Location } from 'history';
+import { Outlet, Route as ReactRoute, Routes, useNavigate, useLocation as useReactLocation, useParams as useRouterParams } from 'react-router';
 import { BrowserRouter, Link as ReactLink } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 
@@ -21,6 +22,11 @@ export const useNavigator = (): Navigator => {
   };
 };
 
+export const useLocation = (): Location => {
+  const reactLocation = useReactLocation();
+  return reactLocation;
+};
+
 export interface IRouterAuthManager {
   getIsUserLoggedIn: () => boolean;
 }
@@ -32,7 +38,7 @@ export const useRouterAuthManager = (): IRouterAuthManager | undefined => {
   return authManager;
 };
 
-export interface IRouteProps<PagePropsType = Record<string, unknown>> {
+export interface IRouteProps<PagePropsType = Record<string, string>> extends IMultiChildProps<IRouteProps> {
   path?: string;
   default?: boolean;
   redirectIfAuth?: string;
@@ -94,6 +100,16 @@ export const SubRouter = (props: ISubRouterProps): React.ReactElement => {
   );
 };
 
+export interface ISubRouterOutletProps {
+}
+
+// eslint-disable-next-line unused-imports/no-unused-vars
+export const SubRouterOutlet = (props: ISubRouterOutletProps): React.ReactElement => {
+  return (
+    <Outlet />
+  );
+};
+
 export interface IRouterProps extends ISubRouterProps {
   authManager?: IRouterAuthManager;
   staticPath?: string;
@@ -102,7 +118,7 @@ export interface IRouterProps extends ISubRouterProps {
 export const Router = (props: IRouterProps): React.ReactElement => {
   const internals = (
     <RouterAuthManagerContext.Provider value={props.authManager}>
-      <SubRouter {...props}>
+      <SubRouter>
         { props.children }
       </SubRouter>
     </RouterAuthManagerContext.Provider>
