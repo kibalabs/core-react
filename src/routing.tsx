@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { Route as ReactRoute, Routes, useNavigate, useParams as useRouterParams } from 'react-router';
+import { Location } from 'history';
+import { Outlet, Route as ReactRoute, Routes, useNavigate, useLocation as useReactLocation, useParams as useRouterParams } from 'react-router';
 import { BrowserRouter, Link as ReactLink } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 
 import { ErrorBoundary } from './errorBoundary';
-import { IMultiChildProps } from './parentComponentProps';
+import { IMultiChildProps, ISingleAnyChildProps, ISingleChildProps } from './parentComponentProps';
 
 export interface Navigator {
   navigateTo: (target: string, shouldReplace?: boolean) => void;
@@ -21,6 +22,11 @@ export const useNavigator = (): Navigator => {
   };
 };
 
+export const useLocation = (): Location => {
+  const reactLocation = useReactLocation();
+  return reactLocation;
+};
+
 export interface IRouterAuthManager {
   getIsUserLoggedIn: () => boolean;
 }
@@ -32,7 +38,7 @@ export const useRouterAuthManager = (): IRouterAuthManager | undefined => {
   return authManager;
 };
 
-export interface IRouteProps<PagePropsType = Record<string, unknown>> {
+export interface IRouteProps<PagePropsType = Record<string, unknown>> extends ISingleChildProps<ISubRouterProps> {
   path?: string;
   default?: boolean;
   redirectIfAuth?: string;
@@ -91,6 +97,17 @@ export const SubRouter = (props: ISubRouterProps): React.ReactElement => {
     <Routes>
       { props.children }
     </Routes>
+  );
+};
+
+export interface ISubRouterOutletProps extends ISingleAnyChildProps {
+}
+
+export const SubRouteOutlet = (props: ISubRouterOutletProps): React.ReactElement => {
+  return (
+    <Outlet>
+      { props.children }
+    </Outlet>
   );
 };
 
