@@ -103,6 +103,7 @@ export const SubRouter = (props: ISubRouterProps): React.ReactElement => {
 export interface ISubRouterOutletProps {
 }
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 export const SubRouterOutlet = (props: ISubRouterOutletProps): React.ReactElement => {
   return (
     <Outlet />
