@@ -8,13 +8,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.6.2] - 2021-07-15
+
+### Added
 - [MINOR] Added `useLocation`
 - [MINOR] Added `SubRouteOutlet` to render sub-routes within a route
 
 ### Changed
 - [MINOR] Fixes for routing types
-
-### Removed
 
 ## [0.6.1] - 2021-07-06
 
@@ -22,10 +28,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Added `useDebouncedCallback` for handling frequent state changes
 - [MINOR] Added `useWindowSize` for tracking window size
 - [MINOR] Added `usePreviousValue` for storing previous value
-
-### Changed
-
-### Removed
 
 ## [0.6.0] - 2021-02-06
 
@@ -45,18 +47,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Created `IOptionalSingleChildProps` to allow components to require an optional single child prop
 - [MINOR] Created `OptionalProppedElement` to allow children from `IMultiChildProps` and `IOptionalSingleChildProps` to accept false values
 
-### Changed
-
-### Removed
-
 ## [0.5.4] - 2020-12-31
-
-### Added
 
 ### Changed
 - [MINOR] Corrected typings
-
-### Removed
 
 ## [0.5.3] - 2020-12-28
 
@@ -66,18 +60,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Changed
 - [MINOR] Made `ISingleAnyChildProps` and `IMultiAnyChildProps` accept `React.ReactNode`
 
-### Removed
-
 ## [0.5.2] - 2020-12-23
 
 ### Added
 - [MINOR] Updated react requirement to >=16.9 to allow for react 17
 - [MINOR] Added `routing.createStaticHistory` to create a static history (useful for testing and SSR)
 - [MINOR] Added `pageElement` prop to `Route` to allow using an instantiated page element
-
-### Changed
-
-### Removed
 
 ## [0.5.1] - 2020-12-16
 
@@ -86,10 +74,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Added optional `history` prop to router to allow external control (useful for testing and SSR)
 - [MINOR] Added `getIsRunningOnBrowser` function
 - [MINOR] Added `useIsomorphicLayoutEffect` to make life easy for SSR
-
-### Changed
-
-### Removed
 
 ## [0.5.0] - 2020-11-25
 
