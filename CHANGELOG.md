@@ -8,8 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MINOR] Added `useDeepCompareMemo`
+- [MINOR] Added `useDeepCompareCallback`
 
 ### Changed
+- [MINOR] Fix `useDeepCompareEffect` to not include the callback as a dependency
 
 ### Removed
 
