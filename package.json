@@ -28,8 +28,8 @@
   "dependencies": {
     "@kibalabs/core": "^0.5.4",
     "history": "^5.0.0",
-    "react-router": "v6.0.0-beta.0",
-    "react-router-dom": "v6.0.0-beta.0",
+    "react-router": "v6.0.0-beta.5",
+    "react-router-dom": "v6.0.0-beta.5",
     "react-is": "^17.0.1"
   },
   "devDependencies": {
