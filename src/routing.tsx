@@ -35,7 +35,7 @@ export const RouterAuthManagerContext = React.createContext<IRouterAuthManager |
 
 export const CoreRoutingEnabledContext = React.createContext<boolean | undefined>(true);
 
-export const useIsCoreRoutingEnabled = (): boolean => {
+export const useIsCoreRoutingEnabled = (): boolean | undefined=> {
   const coreRoutingEnabled = React.useContext(CoreRoutingEnabledContext);
   return coreRoutingEnabled;
 };
