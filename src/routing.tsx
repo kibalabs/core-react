@@ -33,7 +33,7 @@ export interface IRouterAuthManager {
 
 export const RouterAuthManagerContext = React.createContext<IRouterAuthManager | undefined>(undefined);
 
-export const CoreRoutingEnabledContext = React.createContext<boolean>(true);
+export const CoreRoutingEnabledContext = React.createContext<boolean | undefined>(true);
 
 export const useIsCoreRoutingEnabled = (): boolean => {
   const coreRoutingEnabled = React.useContext(CoreRoutingEnabledContext);
@@ -130,14 +130,20 @@ export const Router = (props: IRouterProps): React.ReactElement => {
       </SubRouter>
     </RouterAuthManagerContext.Provider>
   );
+
   return props.staticPath ? (
+
     <StaticRouter location={props.staticPath}>
-      {internals}
+      <CoreRoutingEnabledContext.Provider value={true}>
+        {internals}
+      </CoreRoutingEnabledContext.Provider>
     </StaticRouter>
   ) : (
+
     <BrowserRouter>
       {internals}
     </BrowserRouter>
+
   );
 };
 
