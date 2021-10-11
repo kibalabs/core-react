@@ -33,6 +33,13 @@ export interface IRouterAuthManager {
 
 export const RouterAuthManagerContext = React.createContext<IRouterAuthManager | undefined>(undefined);
 
+export const CoreRoutingEnabledContext = React.createContext<boolean>(true);
+
+export const useIsCoreRoutingEnabled = (): boolean => {
+  const coreRoutingEnabled = React.useContext(CoreRoutingEnabledContext);
+  return coreRoutingEnabled;
+};
+
 export const useRouterAuthManager = (): IRouterAuthManager | undefined => {
   const authManager = React.useContext(RouterAuthManagerContext);
   return authManager;
