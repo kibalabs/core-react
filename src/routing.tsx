@@ -137,18 +137,13 @@ export const Router = (props: IRouterProps): React.ReactElement => {
   );
 
   return props.staticPath ? (
-
     <StaticRouter location={props.staticPath}>
-
       {internals}
-
     </StaticRouter>
   ) : (
-
     <BrowserRouter>
       {internals}
     </BrowserRouter>
-
   );
 };
 
