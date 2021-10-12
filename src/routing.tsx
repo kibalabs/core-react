@@ -33,10 +33,13 @@ export interface IRouterAuthManager {
 
 export const RouterAuthManagerContext = React.createContext<IRouterAuthManager | undefined>(undefined);
 
-export const CoreRoutingEnabledContext = React.createContext<boolean | undefined>(true);
+export const CoreRoutingEnabledContext = React.createContext<boolean | undefined>(undefined);
 
-export const useIsCoreRoutingEnabled = (): boolean | undefined=> {
+export const useIsCoreRoutingEnabled = (): boolean => {
   const coreRoutingEnabled = React.useContext(CoreRoutingEnabledContext);
+  if (!coreRoutingEnabled) {
+    return false;
+  }
   return coreRoutingEnabled;
 };
 
@@ -124,19 +127,21 @@ export interface IRouterProps extends ISubRouterProps {
 
 export const Router = (props: IRouterProps): React.ReactElement => {
   const internals = (
-    <RouterAuthManagerContext.Provider value={props.authManager}>
-      <SubRouter>
-        { props.children }
-      </SubRouter>
-    </RouterAuthManagerContext.Provider>
+    <CoreRoutingEnabledContext.Provider value={true}>
+      <RouterAuthManagerContext.Provider value={props.authManager}>
+        <SubRouter>
+          { props.children }
+        </SubRouter>
+      </RouterAuthManagerContext.Provider>
+    </CoreRoutingEnabledContext.Provider>
   );
 
   return props.staticPath ? (
 
     <StaticRouter location={props.staticPath}>
-      <CoreRoutingEnabledContext.Provider value={true}>
-        {internals}
-      </CoreRoutingEnabledContext.Provider>
+
+      {internals}
+
     </StaticRouter>
   ) : (
 
