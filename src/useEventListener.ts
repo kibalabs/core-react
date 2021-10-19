@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { DependencyList } from 'react';
 
-export const useEventListener = (element: HTMLElement | Document | Window | null, eventName: string, handler: (event: Event) => void, dependencies?: any[]): void => {
+export const useEventListener = (element: HTMLElement | Document | Window | null, eventName: string, handler: (event: Event) => void, dependencies: DependencyList = []): void => {
   const savedHandler = React.useRef<(event: Event) => void>(handler);
 
   React.useEffect((): void => {
