@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const useEventListener = (element: HTMLElement | Document | Window | null, eventName: string, handler: (event: Event) => void): void => {
+export const useEventListener = (element: HTMLElement | Document | Window | null, eventName: string, handler: (event: Event) => void, dependencies: React.DependencyList = []): void => {
   const savedHandler = React.useRef<(event: Event) => void>(handler);
 
   React.useEffect((): void => {
@@ -18,5 +18,7 @@ export const useEventListener = (element: HTMLElement | Document | Window | null
     return (): void => {
       element.removeEventListener(eventName, eventListener);
     };
-  }, [eventName, element]);
+  },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  [eventName, element, ...dependencies]);
 };
