@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Changed
 - [MINOR] Fix `useDeepCompareEffect` to not include the callback as a dependency
+- [MINOR] Updated `useEventListener` to specify dependencies
 
 ### Removed
 

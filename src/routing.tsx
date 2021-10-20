@@ -48,6 +48,7 @@ export interface IRouteProps<PagePropsType = Record<string, string>> extends IMu
 }
 
 export const Route = (props: IRouteProps): React.ReactElement | null => {
+  console.log('Route', props);
   const params = useRouterParams();
   const authManager = useRouterAuthManager();
   const navigator = useNavigator();
@@ -93,6 +94,7 @@ export interface ISubRouterProps extends IMultiChildProps<IRouteProps<unknown>> 
 }
 
 export const SubRouter = (props: ISubRouterProps): React.ReactElement => {
+  console.log('SubRouter', props);
   return (
     <Routes>
       { props.children }
@@ -116,13 +118,15 @@ export interface IRouterProps extends ISubRouterProps {
 }
 
 export const Router = (props: IRouterProps): React.ReactElement => {
+  console.log('Router', props);
   const internals = (
     <RouterAuthManagerContext.Provider value={props.authManager}>
-      <SubRouter>
+      {/* <SubRouter> */}
         { props.children }
-      </SubRouter>
+      {/* </SubRouter> */}
     </RouterAuthManagerContext.Provider>
   );
+  console.log('internals', internals);
   return props.staticPath ? (
     <StaticRouter location={props.staticPath}>
       {internals}
