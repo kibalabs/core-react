@@ -118,9 +118,9 @@ export interface IRouterProps extends ISubRouterProps {
 export const Router = (props: IRouterProps): React.ReactElement => {
   const internals = (
     <RouterAuthManagerContext.Provider value={props.authManager}>
-      {/* <SubRouter> */}
+      <SubRouter>
         { props.children }
-      {/* </SubRouter> */}
+      </SubRouter>
     </RouterAuthManagerContext.Provider>
   );
   return props.staticPath ? (
