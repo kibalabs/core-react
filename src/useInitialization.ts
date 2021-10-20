@@ -2,7 +2,7 @@ import React from 'react';
 
 export const useInitialization = (effect: React.EffectCallback): boolean => {
   const [isInitialized, setIsInitialized] = React.useState<boolean>(false);
-  React.useEffect((): (void | (() => void | undefined)) => {
+  React.useEffect((): (void | (() => void)) => {
     const returnValue = effect();
     setIsInitialized(true);
     return returnValue;
