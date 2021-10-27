@@ -6,7 +6,7 @@ import { BrowserRouter, Link as ReactLink } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 
 import { ErrorBoundary } from './errorBoundary';
-import { IMultiChildProps } from './parentComponentProps';
+import { IMultiAnyChildProps, IMultiChildProps } from './parentComponentProps';
 
 export interface Navigator {
   navigateTo: (target: string, shouldReplace?: boolean) => void;
@@ -147,13 +147,12 @@ export const Router = (props: IRouterProps): React.ReactElement => {
   );
 };
 
-export interface ILinkProps {
-  target: string;
-  text: string;
+export interface ILinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
+  href: string;
 }
 
 export const Link = (props: ILinkProps): React.ReactElement => {
   return (
-    <ReactLink to={props.target}>{props.text}</ReactLink>
+    <ReactLink to={props.href} {...props}>{props.children}</ReactLink>
   );
 };
