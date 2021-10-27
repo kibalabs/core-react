@@ -26,16 +26,16 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "dependencies": {
-    "@kibalabs/core": "^0.5.4",
-    "history": "^5.0.0",
-    "react-router": "v6.0.0-beta.0",
-    "react-router-dom": "v6.0.0-beta.0",
+    "@kibalabs/core": "^0.5.5",
+    "history": "^5.0.1",
+    "react-router": "v6.0.0-beta.3",
+    "react-router-dom": "v6.0.0-beta.3",
     "react-is": "^17.0.1"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.7.0",
-    "@types/react": "17.0.0",
-    "@types/react-is": "17.0.0",
+    "@kibalabs/build": "0.8.0",
+    "@types/react": "17.0.30",
+    "@types/react-is": "17.0.2",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
