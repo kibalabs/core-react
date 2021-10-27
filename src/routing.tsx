@@ -6,7 +6,7 @@ import { BrowserRouter, Link as ReactLink } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 
 import { ErrorBoundary } from './errorBoundary';
-import { IMultiAnyChildProps, IMultiChildProps } from './parentComponentProps';
+import { IMultiChildProps } from './parentComponentProps';
 
 export interface Navigator {
   navigateTo: (target: string, shouldReplace?: boolean) => void;
