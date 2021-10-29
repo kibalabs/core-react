@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MINOR] Added `useIsCoreRoutingEnabled` for routing to check if core-routing is used.
+
+## [0.6.3] - 2021-10-29
+
+### Added
 - [MINOR] Added `useDeepCompareMemo`
 - [MINOR] Added `useDeepCompareCallback`
 

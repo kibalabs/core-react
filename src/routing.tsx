@@ -147,7 +147,7 @@ export const Router = (props: IRouterProps): React.ReactElement => {
   );
 };
 
-export interface ILinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
+export interface ILinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
   href: string;
 }
 
