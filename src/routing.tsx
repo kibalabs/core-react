@@ -33,6 +33,16 @@ export interface IRouterAuthManager {
 
 export const RouterAuthManagerContext = React.createContext<IRouterAuthManager | undefined>(undefined);
 
+export const CoreRoutingEnabledContext = React.createContext<boolean | undefined>(undefined);
+
+export const useIsCoreRoutingEnabled = (): boolean => {
+  const coreRoutingEnabled = React.useContext(CoreRoutingEnabledContext);
+  if (!coreRoutingEnabled) {
+    return false;
+  }
+  return coreRoutingEnabled;
+};
+
 export const useRouterAuthManager = (): IRouterAuthManager | undefined => {
   const authManager = React.useContext(RouterAuthManagerContext);
   return authManager;
@@ -117,12 +127,15 @@ export interface IRouterProps extends ISubRouterProps {
 
 export const Router = (props: IRouterProps): React.ReactElement => {
   const internals = (
-    <RouterAuthManagerContext.Provider value={props.authManager}>
-      <SubRouter>
-        { props.children }
-      </SubRouter>
-    </RouterAuthManagerContext.Provider>
+    <CoreRoutingEnabledContext.Provider value={true}>
+      <RouterAuthManagerContext.Provider value={props.authManager}>
+        <SubRouter>
+          { props.children }
+        </SubRouter>
+      </RouterAuthManagerContext.Provider>
+    </CoreRoutingEnabledContext.Provider>
   );
+
   return props.staticPath ? (
     <StaticRouter location={props.staticPath}>
       {internals}
@@ -134,13 +147,12 @@ export const Router = (props: IRouterProps): React.ReactElement => {
   );
 };
 
-export interface ILinkProps {
-  target: string;
-  text: string;
+export interface ILinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
+  href: string;
 }
 
 export const Link = (props: ILinkProps): React.ReactElement => {
   return (
-    <ReactLink to={props.target}>{props.text}</ReactLink>
+    <ReactLink to={props.href} {...props}>{props.children}</ReactLink>
   );
 };

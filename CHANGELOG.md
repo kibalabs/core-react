@@ -10,10 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 - [MINOR] Added `useDeepCompareMemo`
 - [MINOR] Added `useDeepCompareCallback`
+- [MINOR] Added `useIsCoreRoutingEnabled` for routing to check if core-routing is used.
 
 ### Changed
 - [MINOR] Fix `useDeepCompareEffect` to not include the callback as a dependency
 - [MINOR] Updated `useEventListener` to specify dependencies
+- [MAJOR] Updated `Link` component in routing to use href and pass-through all other props
 
 ### Removed
 
