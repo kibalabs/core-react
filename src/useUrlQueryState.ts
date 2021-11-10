@@ -2,7 +2,7 @@ import React from 'react';
 
 import { integerFromString, integerToString } from '@kibalabs/core';
 
-export const useUrlQueryState = (name: string, overrideInitialValue?: string | null): [string | null | undefined, (newValue: string | null | undefined) => void] => {
+export const useUrlQueryState = (name: string, overrideInitialValue?: string, defaultValue?: string): [string | null | undefined, (newValue: string | null | undefined) => void] => {
   const [value, setValue] = React.useState<string | undefined>((): string | undefined => {
     const searchParams = new URLSearchParams(window.location.search);
     if (overrideInitialValue !== undefined) {
@@ -13,7 +13,7 @@ export const useUrlQueryState = (name: string, overrideInitialValue?: string | n
       }
     }
     const paramValue = searchParams.get(name);
-    return paramValue === null ? undefined : paramValue;
+    return paramValue === null ? defaultValue : paramValue;
   });
 
   const setter = React.useCallback((newValue: string | null | undefined): void => {
