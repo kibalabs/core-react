@@ -2,7 +2,7 @@ import React from 'react';
 
 import { integerFromString, integerToString } from '@kibalabs/core';
 
-export const useUrlQueryState = (name: string, overrideInitialValue?: string, defaultValue?: string): [string | null | undefined, (newValue: string | null | undefined) => void] => {
+export const useUrlQueryState = (name: string, overrideInitialValue?: string | null, defaultValue?: string): [string | null | undefined, (newValue: string | null | undefined) => void] => {
   const [value, setValue] = React.useState<string | undefined>((): string | undefined => {
     const searchParams = new URLSearchParams(window.location.search);
     if (overrideInitialValue !== undefined) {
@@ -30,7 +30,12 @@ export const useUrlQueryState = (name: string, overrideInitialValue?: string, de
   return [value, setter];
 };
 
-export const useIntegerUrlQueryState = (name: string, overrideInitialValue?: number): [number | null, (newValue: number | null) => void] => {
-  const [value, setValue] = useUrlQueryState(name, integerToString(overrideInitialValue));
+export const useIntegerUrlQueryState = (name: string, overrideInitialValue?: number, defaultValue?: number): [number | null, (newValue: number | null) => void] => {
+  const [value, setValue] = useUrlQueryState(name, integerToString(overrideInitialValue), integerToString(defaultValue));
+  return [integerFromString(value) as number | null, ((newValue: number | null): void => setValue(integerToString(newValue) as string | null))];
+};
+
+export const useDateUrlQueryState = (name: string, overrideInitialValue?: number, defaultValue?: number): [number | null, (newValue: number | null) => void] => {
+  const [value, setValue] = useUrlQueryState(name, integerToString(overrideInitialValue), integerToString(defaultValue));
   return [integerFromString(value) as number | null, ((newValue: number | null): void => setValue(integerToString(newValue) as string | null))];
 };
