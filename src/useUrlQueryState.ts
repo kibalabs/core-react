@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { integerFromString, integerToString } from '@kibalabs/core';
+import { dateFromString, dateToString, integerFromString, integerToString } from '@kibalabs/core';
 
 export const useUrlQueryState = (name: string, overrideInitialValue?: string | null, defaultValue?: string): [string | null | undefined, (newValue: string | null | undefined) => void] => {
   const [value, setValue] = React.useState<string | undefined>((): string | undefined => {
@@ -35,7 +35,27 @@ export const useIntegerUrlQueryState = (name: string, overrideInitialValue?: num
   return [integerFromString(value) as number | null, ((newValue: number | null): void => setValue(integerToString(newValue) as string | null))];
 };
 
-export const useDateUrlQueryState = (name: string, overrideInitialValue?: number, defaultValue?: number): [number | null, (newValue: number | null) => void] => {
-  const [value, setValue] = useUrlQueryState(name, integerToString(overrideInitialValue), integerToString(defaultValue));
-  return [integerFromString(value) as number | null, ((newValue: number | null): void => setValue(integerToString(newValue) as string | null))];
+const serializeDateToString = (value: Date | null | undefined, format: string): string | null | undefined => {
+  if (value === undefined) {
+    return undefined;
+  }
+  if (value === null) {
+    return null;
+  }
+  return dateToString(value, format);
+};
+
+const serializeDateFromString = (value: string | null | undefined, format: string): Date | null | undefined => {
+  if (value === undefined) {
+    return undefined;
+  }
+  if (value === null) {
+    return null;
+  }
+  return dateFromString(value, format);
+};
+
+export const useDateUrlQueryState = (name: string, overrideInitialValue?: Date, defaultValue?: Date, format?: string): [Date | null, (newValue: Date | null) => void] => {
+  const [value, setValue] = useUrlQueryState(name, dateToString(overrideInitialValue), dateToString(defaultValue));
+  return [serializeDateFromString(value, format) as Date | null, ((newValue: Date | null): void => setValue(serializeDateToString(newValue, format) as string | null))];
 };
