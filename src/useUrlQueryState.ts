@@ -30,12 +30,12 @@ export const useUrlQueryState = (name: string, overrideInitialValue?: string | n
   return [value, setter];
 };
 
-export const useIntegerUrlQueryState = (name: string, overrideInitialValue?: number, defaultValue?: number): [number | null, (newValue: number | null) => void] => {
-  const [value, setValue] = useUrlQueryState(name, integerToString(overrideInitialValue), integerToString(defaultValue));
+export const useIntegerUrlQueryState = (name: string, overrideInitialValue?: number): [number | null, (newValue: number | null) => void] => {
+  const [value, setValue] = useUrlQueryState(name, integerToString(overrideInitialValue));
   return [integerFromString(value) as number | null, ((newValue: number | null): void => setValue(integerToString(newValue) as string | null))];
 };
 
-const serializeDateToString = (value: Date | null | undefined, format: string): string | null | undefined => {
+const serializeDateToString = (value: Date | null | undefined, format?: string): string | null | undefined => {
   if (value === undefined) {
     return undefined;
   }
@@ -45,7 +45,7 @@ const serializeDateToString = (value: Date | null | undefined, format: string): 
   return dateToString(value, format);
 };
 
-const serializeDateFromString = (value: string | null | undefined, format: string): Date | null | undefined => {
+const serializeDateFromString = (value: string | null | undefined, format?: string): Date | null | undefined => {
   if (value === undefined) {
     return undefined;
   }
@@ -55,7 +55,7 @@ const serializeDateFromString = (value: string | null | undefined, format: strin
   return dateFromString(value, format);
 };
 
-export const useDateUrlQueryState = (name: string, overrideInitialValue?: Date, defaultValue?: Date, format?: string): [Date | null, (newValue: Date | null) => void] => {
+export const useDateUrlQueryState = (name: string, overrideInitialValue: Date, defaultValue: Date, format?: string): [Date | null, (newValue: Date | null) => void] => {
   const [value, setValue] = useUrlQueryState(name, dateToString(overrideInitialValue), dateToString(defaultValue));
   return [serializeDateFromString(value, format) as Date | null, ((newValue: Date | null): void => setValue(serializeDateToString(newValue, format) as string | null))];
 };
