@@ -55,7 +55,7 @@ const serializeDateFromString = (value: string | null | undefined, format?: stri
   return dateFromString(value, format);
 };
 
-export const useDateUrlQueryState = (name: string, overrideInitialValue: Date, defaultValue: Date, format?: string): [Date | null, (newValue: Date | null) => void] => {
-  const [value, setValue] = useUrlQueryState(name, dateToString(overrideInitialValue), dateToString(defaultValue));
+export const useDateUrlQueryState = (name: string, overrideInitialValue?: Date | null, defaultValue?: Date, format?: string): [Date | null, (newValue: Date | null) => void] => {
+  const [value, setValue] = useUrlQueryState(name, serializeDateToString(overrideInitialValue), serializeDateToString(defaultValue));
   return [serializeDateFromString(value, format) as Date | null, ((newValue: Date | null): void => setValue(serializeDateToString(newValue, format) as string | null))];
 };
