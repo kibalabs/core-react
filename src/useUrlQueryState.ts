@@ -2,7 +2,7 @@ import React from 'react';
 
 import { dateFromString, dateToString, integerFromString, integerToString } from '@kibalabs/core';
 
-export const useUrlQueryState = (name: string, overrideInitialValue?: string | null, defaultValue?: string): [string | null | undefined, (newValue: string | null | undefined) => void] => {
+export const useUrlQueryState = (name: string, overrideInitialValue?: string | null, defaultValue?: string): [string | null, (newValue: string | null) => void] => {
   const [value, setValue] = React.useState<string | undefined>((): string | undefined => {
     const searchParams = new URLSearchParams(window.location.search);
     if (overrideInitialValue !== undefined) {
@@ -13,7 +13,7 @@ export const useUrlQueryState = (name: string, overrideInitialValue?: string | n
       }
     }
     const paramValue = searchParams.get(name);
-    return paramValue === null ? defaultValue : paramValue;
+    return paramValue === null || paramValue === undefined ? defaultValue : paramValue;
   });
 
   const setter = React.useCallback((newValue: string | null | undefined): void => {
@@ -24,7 +24,7 @@ export const useUrlQueryState = (name: string, overrideInitialValue?: string | n
       searchParams.set(name, newValue);
     }
     window.history.replaceState({}, '', `${window.location.pathname}?${searchParams.toString()}`);
-    setValue(newValue === null ? undefined : newValue);
+    setValue(newValue === null || newValue === undefined ? defaultValue : newValue);
   }, [name]);
 
   return [value, setter];
@@ -55,7 +55,8 @@ const serializeDateFromString = (value: string | null | undefined, format?: stri
   return dateFromString(value, format);
 };
 
-export const useDateUrlQueryState = (name: string, overrideInitialValue?: Date, defaultValue?: Date, format?: string): [Date | null, (newValue: Date | null) => void] => {
-  const [value, setValue] = useUrlQueryState(name, serializeDateToString(overrideInitialValue), serializeDateToString(defaultValue) || undefined);
-  return [serializeDateFromString(value, format) as Date | null, ((newValue: Date | null): void => setValue(serializeDateToString(newValue, format) as string | null))];
+export const useDateUrlQueryState = (name: string, overrideInitialValue?: Date, format?: string, defaultValue?: Date): [Date | null, (newValue: Date | null) => void] => {
+  const [value, setValue] = useUrlQueryState(name, serializeDateToString(overrideInitialValue, format), serializeDateToString(defaultValue, format) as string | undefined);
+  const valueMemo = React.useMemo((): Date | null => serializeDateFromString(value, format) as Date | null, [value]);
+  return [valueMemo, ((newValue: Date | null): void => setValue(serializeDateToString(newValue, format) as string | null))];
 };
