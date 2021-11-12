@@ -2,7 +2,7 @@ import React from 'react';
 
 import { dateFromString, dateToString, integerFromString, integerToString } from '@kibalabs/core';
 
-export const useUrlQueryState = (name: string, overrideInitialValue?: string | null, defaultValue?: string): [string | null, (newValue: string | null) => void] => {
+export const useUrlQueryState = (name: string, overrideInitialValue?: string | null, defaultValue?: string): [string | null| undefined, (newValue: string | null) => void] => {
   const [value, setValue] = React.useState<string | undefined>((): string | undefined => {
     const searchParams = new URLSearchParams(window.location.search);
     if (overrideInitialValue !== undefined) {
@@ -25,7 +25,7 @@ export const useUrlQueryState = (name: string, overrideInitialValue?: string | n
     }
     window.history.replaceState({}, '', `${window.location.pathname}?${searchParams.toString()}`);
     setValue(newValue === null || newValue === undefined ? defaultValue : newValue);
-  }, [name]);
+  }, [name, defaultValue]);
 
   return [value, setter];
 };
@@ -57,6 +57,6 @@ const serializeDateFromString = (value: string | null | undefined, format?: stri
 
 export const useDateUrlQueryState = (name: string, overrideInitialValue?: Date, format?: string, defaultValue?: Date): [Date | null, (newValue: Date | null) => void] => {
   const [value, setValue] = useUrlQueryState(name, serializeDateToString(overrideInitialValue, format), serializeDateToString(defaultValue, format) as string | undefined);
-  const valueMemo = React.useMemo((): Date | null => serializeDateFromString(value, format) as Date | null, [value]);
+  const valueMemo = React.useMemo((): Date | null => serializeDateFromString(value, format) as Date | null, [value, format]);
   return [valueMemo, ((newValue: Date | null): void => setValue(serializeDateToString(newValue, format) as string | null))];
 };
