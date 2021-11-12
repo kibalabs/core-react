@@ -2,7 +2,7 @@ import React from 'react';
 
 import { dateFromString, dateToString, integerFromString, integerToString } from '@kibalabs/core';
 
-export const useUrlQueryState = (name: string, overrideInitialValue?: string | null, defaultValue?: string): [string | null | undefined, (newValue: string | null | undefined) => void] => {
+export const useUrlQueryState = (name: string, overrideInitialValue?: string | null, defaultValue?: string | null): [string | null | undefined, (newValue: string | null | undefined) => void] => {
   const [value, setValue] = React.useState<string | undefined>((): string | undefined => {
     const searchParams = new URLSearchParams(window.location.search);
     if (overrideInitialValue !== undefined) {
@@ -56,6 +56,6 @@ const serializeDateFromString = (value: string | null | undefined, format?: stri
 };
 
 export const useDateUrlQueryState = (name: string, overrideInitialValue?: Date | null, defaultValue?: Date, format?: string): [Date | null, (newValue: Date | null) => void] => {
-  const [value, setValue] = useUrlQueryState(name, serializeDateToString(overrideInitialValue), serializeDateToString(defaultValue));
+  const [value, setValue] = useUrlQueryState(name, serializeDateToString(overrideInitialValue), serializeDateToString(defaultValue) || undefined);
   return [serializeDateFromString(value, format) as Date | null, ((newValue: Date | null): void => setValue(serializeDateToString(newValue, format) as string | null))];
 };
