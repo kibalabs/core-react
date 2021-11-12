@@ -2,8 +2,8 @@ import React from 'react';
 
 import { dateFromString, dateToString, integerFromString, integerToString } from '@kibalabs/core';
 
-export const useUrlQueryState = (name: string, overrideInitialValue?: string | null, defaultValue?: string): [string | null| undefined, (newValue: string | null) => void] => {
-  const [value, setValue] = React.useState<string | undefined>((): string | undefined => {
+export const useUrlQueryState = (name: string, overrideInitialValue?: string | null, defaultValue?: string): [string | null, (newValue: string | null) => void] => {
+  const [value, setValue] = React.useState<string | null>((): string | null => {
     const searchParams = new URLSearchParams(window.location.search);
     if (overrideInitialValue !== undefined) {
       if (overrideInitialValue) {
@@ -13,7 +13,7 @@ export const useUrlQueryState = (name: string, overrideInitialValue?: string | n
       }
     }
     const paramValue = searchParams.get(name);
-    return paramValue === null || paramValue === undefined ? defaultValue : paramValue;
+    return paramValue === null || paramValue === undefined ? (defaultValue || null) : paramValue;
   });
 
   const setter = React.useCallback((newValue: string | null | undefined): void => {
@@ -24,7 +24,7 @@ export const useUrlQueryState = (name: string, overrideInitialValue?: string | n
       searchParams.set(name, newValue);
     }
     window.history.replaceState({}, '', `${window.location.pathname}?${searchParams.toString()}`);
-    setValue(newValue === null || newValue === undefined ? defaultValue : newValue);
+    setValue(newValue === null || newValue === undefined ? (defaultValue || null) : newValue);
   }, [name, defaultValue]);
 
   return [value, setter];
