@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 
 import { Location } from 'history';
 import { Outlet, Route as ReactRoute, Routes, useNavigate, useLocation as useReactLocation, useParams as useRouterParams } from 'react-router';
@@ -6,7 +6,7 @@ import { BrowserRouter, Link as ReactLink } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 
 import { ErrorBoundary } from './errorBoundary';
-import { IMultiChildProps } from './parentComponentProps';
+import { IMultiAnyChildProps, IMultiChildProps } from './parentComponentProps';
 
 export interface Navigator {
   navigateTo: (target: string, shouldReplace?: boolean) => void;
@@ -48,6 +48,55 @@ export const useRouterAuthManager = (): IRouterAuthManager | undefined => {
   return authManager;
 };
 
+export interface IRedirectProps {
+  target: string;
+  shouldReplace?: boolean
+}
+
+export const Redirect = (props: IRedirectProps): React.ReactElement | null => {
+  const navigator = useNavigator();
+  console.log('Redirect 1');
+  React.useEffect(() => {
+    console.log('Redirect 2', props.target, props.shouldReplace);
+    navigator.navigateTo(props.target, props.shouldReplace);
+  });
+  return null;
+}
+
+export interface IAuthResolverProps extends IMultiAnyChildProps {
+  redirectIfAuth?: string;
+  redirectIfNoAuth?: string;
+}
+
+export const AuthResolver = (props: IAuthResolverProps): React.ReactElement | null => {
+  const authManager = useRouterAuthManager();
+
+  if (props.redirectIfNoAuth) {
+    console.log('AuthResolver 2');
+    if (!authManager) {
+      throw new Error('Cannot use redirectIfNoAuth since an authManager has not been provided to the router');
+    }
+    if (!authManager.getIsUserLoggedIn()) {
+      console.log('AuthResolver 3');
+      return <Redirect target={props.redirectIfNoAuth} shouldReplace={true} />;
+    }
+  }
+
+  if (props.redirectIfAuth) {
+    console.log('AuthResolver 4');
+    if (!authManager) {
+      throw new Error('Cannot use redirectIfAuth since an authManager has not been provided to the router');
+    }
+    if (authManager.getIsUserLoggedIn()) {
+      console.log('AuthResolver 5');
+      return <Redirect target={props.redirectIfAuth} shouldReplace={true} />;
+    }
+  }
+
+  return <React.Fragment>{props.children}</React.Fragment>;
+}
+
+
 export interface IRouteProps<PagePropsType = Record<string, string>> extends IMultiChildProps<IRouteProps> {
   path?: string;
   default?: boolean;
@@ -59,40 +108,25 @@ export interface IRouteProps<PagePropsType = Record<string, string>> extends IMu
 
 export const Route = (props: IRouteProps): React.ReactElement | null => {
   const params = useRouterParams();
-  const authManager = useRouterAuthManager();
-  const navigator = useNavigator();
+
+  console.log('Route 1', props.path);
   if (!props.page && !props.pageElement) {
     throw new Error('One of {page, pageElement} must be passed into each Route');
   }
   if (props.page && props.pageElement) {
-    throw new Error('Only ONE of {page, pageElement} must be passed into each Route');
+    throw new Error('ONLY ONE of {page, pageElement} must be passed into each Route');
   }
-  if (props.redirectIfNoAuth) {
-    if (!authManager) {
-      throw new Error('Cannot use redirectIfNoAuth since an authManager has not ben provided to the router');
-    }
-    if (!authManager.getIsUserLoggedIn()) {
-      navigator.navigateTo(props.redirectIfNoAuth);
-      return null;
-    }
-  }
-  if (props.redirectIfAuth) {
-    if (!authManager) {
-      throw new Error('Cannot use redirectIfAuth since an authManager has not ben provided to the router');
-    }
-    if (authManager.getIsUserLoggedIn()) {
-      navigator.navigateTo(props.redirectIfAuth);
-      return null;
-    }
-  }
+  console.log('Route 2');
 
   return (
     <ReactRoute
       path={props.default ? '*' : props.path}
       element={(
         <ErrorBoundary>
-          {props.page && <props.page {...params} />}
-          {props.pageElement && React.cloneElement(props.pageElement, params)}
+          <AuthResolver redirectIfAuth={props.redirectIfAuth} redirectIfNoAuth={props.redirectIfNoAuth}>
+            {props.page && <props.page {...params} />}
+            {props.pageElement && React.cloneElement(props.pageElement, params)}
+          </AuthResolver>
         </ErrorBoundary>
       )}
     />
