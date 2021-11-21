@@ -13,29 +13,29 @@ export class MockStorage implements Storage {
 
   public setItem(key: string, value: string | null | undefined): void {
     this.storage.set(key, value || '');
-  };
+  }
 
   public getItem(key: string): string | null {
     return this.storage.has(key) ? this.storage.get(key) : null;
-  };
+  }
 
   public removeItem(key: string): void {
     this.storage.delete(key);
-  };
+  }
 
   public get length(): number {
     return this.storage.size;
-  };
+  }
 
   public key(index: number): string {
     const keys = Object.keys(this.storage);
     return keys[index] || null;
-  };
+  }
 
   public clear(): void {
     this.storage.clear();
-  };
-};
+  }
+}
 
 export class LocalStorageClient {
   private localStorage: Storage;
