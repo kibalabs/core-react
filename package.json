@@ -1,6 +1,6 @@
 {
   "name": "@kibalabs/core-react",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "Utilities for use in React projects at Kiba Labs",
   "license": "MIT",
   "repository": {
@@ -33,7 +33,7 @@
     "react-is": "^17.0.1"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.8.0",
+    "@kibalabs/build": "0.8.1",
     "@types/react": "17.0.36",
     "@types/react-is": "17.0.3",
     "react": "17.0.2",

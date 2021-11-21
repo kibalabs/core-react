@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.7.0] - 2021-11-21
+
+### Added
 - [MINOR] Added `useDeepCompareMemo`
 - [MINOR] Added `useDeepCompareCallback`
 - [MINOR] Added `useIsCoreRoutingEnabled` for routing to check if core-routing is used.
@@ -24,8 +32,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 - [MINOR] Updated `useEventListener` to specify dependencies
 - [MAJOR] Updated `Link` component in routing to use href and pass-through all other props
 - [MAJOR] Changed `useLocalStorageState` to accept a `LocalStorageClient`
-
-### Removed
 
 ## [0.6.2] - 2021-07-15
 
