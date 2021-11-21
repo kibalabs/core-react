@@ -16,7 +16,7 @@ export class MockStorage implements Storage {
   }
 
   public getItem(key: string): string | null {
-    return this.storage.has(key) ? this.storage.get(key) : null;
+    return this.storage.has(key) ? this.storage.get(key) || null : null;
   }
 
   public removeItem(key: string): void {
@@ -27,7 +27,7 @@ export class MockStorage implements Storage {
     return this.storage.size;
   }
 
-  public key(index: number): string {
+  public key(index: number): string | null {
     const keys = Object.keys(this.storage);
     return keys[index] || null;
   }
