@@ -12,14 +12,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Changed
 
 ### Removed
-- [MINOR] removed `LocalStorageClient` code from `useLocalStorageState` and import from core-js.
+- [MINOR] removed `LocalStorageClient` code from `useLocalStorageState` and import from core-js
 
 ## [0.7.0] - 2021-11-21
 
 ### Added
 - [MINOR] Added `useDeepCompareMemo`
 - [MINOR] Added `useDeepCompareCallback`
-- [MINOR] Added `useIsCoreRoutingEnabled` for routing to check if core-routing is used.
+- [MINOR] Added `useIsCoreRoutingEnabled` for routing to check if core-routing is used
 - [MINOR] Added `usePan`
 - [MINOR] Added `useMousePositionRef`
 - [MINOR] Added `useScale`
