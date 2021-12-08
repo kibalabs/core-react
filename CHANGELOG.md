@@ -10,9 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+- [MAJOR] Removed `Route` from routing
+- [MAJOR] Changed `Router` and `SubRouter` to require object form routes instead of children
 
 ### Removed
-- [MINOR] removed `LocalStorageClient` code from `useLocalStorageState` and import from core-js
+- [MINOR] Removed `LocalStorageClient` code from `useLocalStorageState` and import from core-js
 
 ## [0.7.0] - 2021-11-21
 

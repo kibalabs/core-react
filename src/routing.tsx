@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { Location } from 'history';
-import { Navigate, Outlet, Route as ReactRoute, useNavigate, useLocation as useReactLocation, useRoutes as useReactRoutes, useParams as useRouterParams } from 'react-router';
+import { Navigate, Outlet, useNavigate, useLocation as useReactLocation, useRoutes as useReactRoutes, useParams as useRouterParams } from 'react-router';
 import { BrowserRouter, Link as ReactLink, RouteObject as ReactRouteObject } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 
 import { ErrorBoundary } from './errorBoundary';
-import { IMultiAnyChildProps, IMultiChildProps } from './parentComponentProps';
+import { IMultiAnyChildProps } from './parentComponentProps';
 
 export interface Navigator {
   navigateTo: (target: string, shouldReplace?: boolean) => void;
@@ -89,42 +89,6 @@ export const AuthResolver = (props: IAuthResolverProps): React.ReactElement => {
   }
 
   return <React.Fragment>{props.children}</React.Fragment>;
-};
-
-
-export interface IRouteProps<PagePropsType = Record<string, string>> extends IMultiChildProps<IRouteProps> {
-  path?: string;
-  default?: boolean;
-  redirectIfAuth?: string;
-  redirectIfNoAuth?: string;
-  page?: React.ComponentType<PagePropsType>;
-  pageElement?: React.ReactElement<PagePropsType>;
-}
-
-export const Route = (props: IRouteProps): React.ReactElement | null => {
-  const params = useRouteParams();
-
-  const path = props.default ? '*' : props.path;
-  if (!props.page && !props.pageElement) {
-    throw new Error('One of {page, pageElement} must be passed into each Route');
-  }
-  if (props.page && props.pageElement) {
-    throw new Error('ONLY ONE of {page, pageElement} must be passed into each Route');
-  }
-
-  return (
-    <ReactRoute
-      path={path}
-      element={(
-        <ErrorBoundary>
-          <AuthResolver redirectIfAuth={props.redirectIfAuth} redirectIfNoAuth={props.redirectIfNoAuth}>
-            {props.page && <props.page {...params} />}
-            {props.pageElement && React.cloneElement(props.pageElement, params)}
-          </AuthResolver>
-        </ErrorBoundary>
-      )}
-    />
-  );
 };
 
 export interface IRoute<PagePropsType = Record<string, string>> {
