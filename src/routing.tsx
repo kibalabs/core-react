@@ -27,7 +27,7 @@ export const useLocation = (): Location => {
   return reactLocation;
 };
 
-export const useRouteParams = (): Record<string, string> => {
+export const useRouteParams = (): Readonly<Record<string, string | undefined>> => {
   const params = useRouterParams();
   return params;
 };
