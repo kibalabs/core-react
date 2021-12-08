@@ -54,23 +54,15 @@ export const useRouterAuthManager = (): IRouterAuthManager | undefined => {
 };
 
 export interface IRedirectProps {
-  id: string;
   target: string;
   shouldReplace?: boolean
 }
 
 export const Redirect = (props: IRedirectProps): React.ReactElement | null => {
-  // const navigator = useNavigator();
-  console.log('Redirect 1', props.id);
-  // React.useEffect(() => {
-  //   console.log('Redirect 2', props.id, props.target, props.shouldReplace);
-  //   navigator.navigateTo(props.target, props.shouldReplace);
-  // });
   return <Navigate to={props.target} replace={props.shouldReplace}/>;
 }
 
 export interface IAuthResolverProps extends IMultiAnyChildProps {
-  id: string;
   redirectIfAuth?: string;
   redirectIfNoAuth?: string;
 }
@@ -78,26 +70,21 @@ export interface IAuthResolverProps extends IMultiAnyChildProps {
 export const AuthResolver = (props: IAuthResolverProps): React.ReactElement | null => {
   const authManager = useRouterAuthManager();
 
-  console.log('AuthResolver', props.id);
   if (props.redirectIfNoAuth) {
-    console.log('AuthResolver 2', props.id);
     if (!authManager) {
       throw new Error('Cannot use redirectIfNoAuth since an authManager has not been provided to the router');
     }
     if (!authManager.getIsUserLoggedIn()) {
-      console.log('AuthResolver 3', props.id);
-      return <Redirect id={props.id} target={props.redirectIfNoAuth} shouldReplace={true} />;
+      return <Redirect target={props.redirectIfNoAuth} shouldReplace={true} />;
     }
   }
 
   if (props.redirectIfAuth) {
-    console.log('AuthResolver 4');
     if (!authManager) {
       throw new Error('Cannot use redirectIfAuth since an authManager has not been provided to the router');
     }
     if (authManager.getIsUserLoggedIn()) {
-      console.log('AuthResolver 5');
-      return <Redirect id={props.id} target={props.redirectIfAuth} shouldReplace={true} />;
+      return <Redirect target={props.redirectIfAuth} shouldReplace={true} />;
     }
   }
 
@@ -116,23 +103,21 @@ export interface IRouteProps<PagePropsType = Record<string, string>> extends IMu
 
 export const Route = (props: IRouteProps): React.ReactElement | null => {
   const params = useRouteParams();
-  
+
   const path = props.default ? '*' : props.path
-  console.log('Route 1', path);
   if (!props.page && !props.pageElement) {
     throw new Error('One of {page, pageElement} must be passed into each Route');
   }
   if (props.page && props.pageElement) {
     throw new Error('ONLY ONE of {page, pageElement} must be passed into each Route');
   }
-  console.log('Route 2');
 
   return (
     <ReactRoute
       path={path}
       element={(
         <ErrorBoundary>
-          <AuthResolver id={path} redirectIfAuth={props.redirectIfAuth} redirectIfNoAuth={props.redirectIfNoAuth}>
+          <AuthResolver redirectIfAuth={props.redirectIfAuth} redirectIfNoAuth={props.redirectIfNoAuth}>
               {props.page && <props.page {...params} />}
               {props.pageElement && React.cloneElement(props.pageElement, params)}
           </AuthResolver>
@@ -161,7 +146,7 @@ const routeToReactRoute = (route: IRoute): ReactRouteObject => {
     caseSensitive: false,
     element: (
       <ErrorBoundary>
-        <AuthResolver id={route.path} redirectIfAuth={route.redirectIfAuth} redirectIfNoAuth={route.redirectIfNoAuth}>
+        <AuthResolver redirectIfAuth={route.redirectIfAuth} redirectIfNoAuth={route.redirectIfNoAuth}>
           {route.page && <route.page />}
           {route.pageElement && React.cloneElement(route.pageElement)}
         </AuthResolver>
@@ -172,13 +157,11 @@ const routeToReactRoute = (route: IRoute): ReactRouteObject => {
 }
 
 export const SubRouter = (props: ISubRouterProps): React.ReactElement => {
-  console.log('props.routes', props.routes)
   const routes = React.useMemo((): ReactRouteObject[] => {
     return props.routes.map((route: IRoute): ReactRouteObject => {
       return routeToReactRoute(route);
     });
   }, props.routes);
-  console.log('routes', routes)
 
   return useReactRoutes(routes);
 };
