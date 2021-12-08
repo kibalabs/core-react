@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Location } from 'history';
-import { Outlet, Route as ReactRoute, Navigate, useRoutes as useReactRoutes, useNavigate, useLocation as useReactLocation, useParams as useRouterParams } from 'react-router';
+import { Navigate, Outlet, Route as ReactRoute, useNavigate, useLocation as useReactLocation, useRoutes as useReactRoutes, useParams as useRouterParams } from 'react-router';
 import { BrowserRouter, Link as ReactLink, RouteObject as ReactRouteObject } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 
@@ -30,7 +30,7 @@ export const useLocation = (): Location => {
 export const useRouteParams = (): Record<string, string> => {
   const params = useRouterParams();
   return params;
-}
+};
 
 export interface IRouterAuthManager {
   getIsUserLoggedIn: () => boolean;
@@ -58,16 +58,16 @@ export interface IRedirectProps {
   shouldReplace?: boolean
 }
 
-export const Redirect = (props: IRedirectProps): React.ReactElement | null => {
-  return <Navigate to={props.target} replace={props.shouldReplace}/>;
-}
+export const Redirect = (props: IRedirectProps): React.ReactElement => {
+  return <Navigate to={props.target} replace={props.shouldReplace} />;
+};
 
 export interface IAuthResolverProps extends IMultiAnyChildProps {
   redirectIfAuth?: string;
   redirectIfNoAuth?: string;
 }
 
-export const AuthResolver = (props: IAuthResolverProps): React.ReactElement | null => {
+export const AuthResolver = (props: IAuthResolverProps): React.ReactElement => {
   const authManager = useRouterAuthManager();
 
   if (props.redirectIfNoAuth) {
@@ -89,7 +89,7 @@ export const AuthResolver = (props: IAuthResolverProps): React.ReactElement | nu
   }
 
   return <React.Fragment>{props.children}</React.Fragment>;
-}
+};
 
 
 export interface IRouteProps<PagePropsType = Record<string, string>> extends IMultiChildProps<IRouteProps> {
@@ -104,7 +104,7 @@ export interface IRouteProps<PagePropsType = Record<string, string>> extends IMu
 export const Route = (props: IRouteProps): React.ReactElement | null => {
   const params = useRouteParams();
 
-  const path = props.default ? '*' : props.path
+  const path = props.default ? '*' : props.path;
   if (!props.page && !props.pageElement) {
     throw new Error('One of {page, pageElement} must be passed into each Route');
   }
@@ -118,8 +118,8 @@ export const Route = (props: IRouteProps): React.ReactElement | null => {
       element={(
         <ErrorBoundary>
           <AuthResolver redirectIfAuth={props.redirectIfAuth} redirectIfNoAuth={props.redirectIfNoAuth}>
-              {props.page && <props.page {...params} />}
-              {props.pageElement && React.cloneElement(props.pageElement, params)}
+            {props.page && <props.page {...params} />}
+            {props.pageElement && React.cloneElement(props.pageElement, params)}
           </AuthResolver>
         </ErrorBoundary>
       )}
@@ -150,18 +150,18 @@ const routeToReactRoute = (route: IRoute): ReactRouteObject => {
     ),
     children: route.subRoutes ? route.subRoutes.map((subRoute: IRoute): ReactRouteObject => routeToReactRoute(subRoute)) : [],
   };
-}
+};
 
 export interface ISubRouterProps {
   routes: IRoute[];
 }
 
-export const SubRouter = (props: ISubRouterProps): React.ReactElement => {
+export const SubRouter = (props: ISubRouterProps): React.ReactElement | null => {
   const routes = React.useMemo((): ReactRouteObject[] => {
     return props.routes.map((route: IRoute): ReactRouteObject => {
       return routeToReactRoute(route);
     });
-  }, props.routes);
+  }, [props.routes]);
 
   return useReactRoutes(routes);
 };
