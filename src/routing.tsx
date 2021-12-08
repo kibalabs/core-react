@@ -136,10 +136,6 @@ export interface IRoute<PagePropsType = Record<string, string>> {
   subRoutes?: IRoute[];
 }
 
-export interface ISubRouterProps {
-  routes: IRoute[];
-}
-
 const routeToReactRoute = (route: IRoute): ReactRouteObject => {
   return {
     path: route.path,
@@ -154,6 +150,10 @@ const routeToReactRoute = (route: IRoute): ReactRouteObject => {
     ),
     children: route.subRoutes ? route.subRoutes.map((subRoute: IRoute): ReactRouteObject => routeToReactRoute(subRoute)) : [],
   };
+}
+
+export interface ISubRouterProps {
+  routes: IRoute[];
 }
 
 export const SubRouter = (props: ISubRouterProps): React.ReactElement => {
