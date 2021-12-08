@@ -8,22 +8,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+- [MINOR] removed `LocalStorageClient` code from `useLocalStorageState` and import from core-js
+
+## [0.7.0] - 2021-11-21
+
+### Added
 - [MINOR] Added `useDeepCompareMemo`
 - [MINOR] Added `useDeepCompareCallback`
-- [MINOR] Added `useIsCoreRoutingEnabled` for routing to check if core-routing is used.
-- [MINOR] Added `usePan` 
-- [MINOR] Added `useMousePositionRef` 
-- [MINOR] Added `useScale` 
-- [MINOR] Added `pointUtil` 
+- [MINOR] Added `useIsCoreRoutingEnabled` for routing to check if core-routing is used
+- [MINOR] Added `usePan`
+- [MINOR] Added `useMousePositionRef`
+- [MINOR] Added `useScale`
+- [MINOR] Added `pointUtil`
 - [MINOR] Added default Value  to `useUrlQueryState`
-- [MINOR] Added `useDateUrlQueryState`  
+- [MINOR] Added `useDateUrlQueryState`
+- [MINOR] Added `MockStorage`
 
 ### Changed
 - [MINOR] Fix `useDeepCompareEffect` to not include the callback as a dependency
 - [MINOR] Updated `useEventListener` to specify dependencies
 - [MAJOR] Updated `Link` component in routing to use href and pass-through all other props
-
-### Removed
+- [MAJOR] Changed `useLocalStorageState` to accept a `LocalStorageClient`
 
 ## [0.6.2] - 2021-07-15
 
