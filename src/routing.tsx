@@ -32,6 +32,28 @@ export const useRouteParams = (): Readonly<Record<string, string | undefined>> =
   return params;
 };
 
+export const useRouteParam = (key: string): string | undefined => {
+  const params = useRouteParams();
+  return params[key];
+};
+
+export const useStringRouteParam = (key: string): string => {
+  const params = useRouteParams();
+  if (params[key] === undefined) {
+    throw Error(`Key ${key} not found in route params: ${params}`);
+  }
+  return params[key] as string;
+};
+
+export const useNumberRouteParam = (key: string): number => {
+  const param = useStringRouteParam(key);
+  const value = Number(param);
+  if (Number.isNaN(value)) {
+    throw Error(`route param for key ${key} cannot be parsed into a number: ${param}`);
+  }
+  return value;
+};
+
 export interface IRouterAuthManager {
   getIsUserLoggedIn: () => boolean;
 }
