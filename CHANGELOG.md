@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+## [0.8.0] - 2021-12-26
+
+### Added
 -[MINOR] Added `useRouteParam`, `useStringRouteParam` and `useNumberRouteParam`
 
 ### Changed
