@@ -65,7 +65,7 @@ export const useObjectLocalStorageState = (name: string, localStorageClient: Loc
   return [objectValue, setObjectValue];
 };
 
-export const useStringListLocalStorageState = (name: string, delimiter = ',', localStorageClient: LocalStorageClient, overrideInitialValue?: string[] | null): [string[] | null, (newValue: string[] | null) => void] => {
+export const useStringListLocalStorageState = (name: string, localStorageClient: LocalStorageClient, overrideInitialValue?: string[] | null, delimiter = ','): [string[] | null, (newValue: string[] | null) => void] => {
   const [value, setValue] = useLocalStorageState(name, localStorageClient, stringListToString(overrideInitialValue));
   return [stringListFromString(value, delimiter) as string[] | null, ((newValue: string[] | null): void => setValue(stringListToString(newValue, delimiter) as string | null))];
 };
