@@ -14,7 +14,7 @@ const getTouchCenter = (event: TouchEvent): Point => {
   };
 };
 
-export const useScale = (ref: React.RefObject<HTMLElement | null>, scaleRate = 0.1, scale = 1.0, setScale: React.Dispatch<React.SetStateAction<number>>): [number, React.RefObject<Point | null>] => {
+export const useScale = (ref: React.RefObject<HTMLElement | null>, setScale: React.Dispatch<React.SetStateAction<number>>, scaleRate = 0.1, scale = 1.0): [number, React.RefObject<Point | null>] => {
   const pinchDistanceRef = React.useRef<number | null>(null);
   const pinchCenterRef = React.useRef<Point | null>(null);
 

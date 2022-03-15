@@ -10,6 +10,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+-[MINOR] Updated `IMultiChildProps` to account for lists of lists of children
+-[MAJOR] Updated `useScale` props order
+-[MAJOR] Updated `useStringListLocalStorageState` props order
 
 ### Removed
 

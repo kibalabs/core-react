@@ -12,7 +12,7 @@ export interface IOptionalSingleChildProps<PropsType> {
 }
 
 export interface IMultiChildProps<PropsType> {
-  children?: OptionalProppedElement<PropsType> | OptionalProppedElement<PropsType>[];
+  children?: OptionalProppedElement<PropsType> | OptionalProppedElement<PropsType>[] | OptionalProppedElement<PropsType>[][];
 }
 
 export interface ISingleAnyChildProps {
