@@ -53,7 +53,7 @@ export class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBo
 
   public reset = (): void => {
     this.setState({ hasError: false, error: null, info: null });
-  }
+  };
 
   public render(): React.ReactElement {
     if (this.state.hasError) {
