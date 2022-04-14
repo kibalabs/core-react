@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { dateFromString, dateToString, integerFromString, integerToString } from '@kibalabs/core';
-import {getIsRunningOnBrowser} from './browserUtil';
+
+import { getIsRunningOnBrowser } from './browserUtil';
 
 export const useUrlQueryState = (name: string, overrideInitialValue?: string | null, defaultValue?: string): [string | null, (newValue: string | null) => void] => {
   const isRunningOnBrowser = getIsRunningOnBrowser();
@@ -30,7 +31,7 @@ export const useUrlQueryState = (name: string, overrideInitialValue?: string | n
     }
     window.history.replaceState({}, '', `${window.location.pathname}?${searchParams.toString()}`);
     setValue(newValue === null || newValue === undefined ? (defaultValue || null) : newValue);
-  }, [name, defaultValue]);
+  }, [name, defaultValue, isRunningOnBrowser]);
 
   return [value, setter];
 };
