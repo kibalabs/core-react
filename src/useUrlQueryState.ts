@@ -1,10 +1,12 @@
 import React from 'react';
 
 import { dateFromString, dateToString, integerFromString, integerToString } from '@kibalabs/core';
+import {getIsRunningOnBrowser} from './browserUtil';
 
 export const useUrlQueryState = (name: string, overrideInitialValue?: string | null, defaultValue?: string): [string | null, (newValue: string | null) => void] => {
+  const isRunningOnBrowser = getIsRunningOnBrowser();
   const [value, setValue] = React.useState<string | null>((): string | null => {
-    const searchParams = new URLSearchParams(window.location.search);
+    const searchParams = new URLSearchParams(isRunningOnBrowser ? window.location.search : {});
     if (overrideInitialValue !== undefined) {
       if (overrideInitialValue) {
         searchParams.set(name, overrideInitialValue);
@@ -17,7 +19,10 @@ export const useUrlQueryState = (name: string, overrideInitialValue?: string | n
   });
 
   const setter = React.useCallback((newValue: string | null | undefined): void => {
-    const searchParams = new URLSearchParams(window.location.search);
+    if (!isRunningOnBrowser) {
+      throw new Error('Can\'t set url query when not running in browser');
+    }
+    const searchParams = new URLSearchParams(isRunningOnBrowser ? window.location.search : {});
     if (newValue === null || newValue === undefined) {
       searchParams.delete(name);
     } else {
