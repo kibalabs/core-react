@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
+-[MAJOR] Update `IRoute` to have `IGlobals` as the first generic prop
+-[MINOR] Added `getPageData` to `IRoute`
 
 ### Removed
 
