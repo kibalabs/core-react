@@ -113,16 +113,17 @@ export const AuthResolver = (props: IAuthResolverProps): React.ReactElement => {
   return <React.Fragment>{props.children}</React.Fragment>;
 };
 
-export interface IRoute<PagePropsType = Record<string, string>> {
+export interface IRoute<IGlobals> {
   path: string;
   redirectIfAuth?: string;
   redirectIfNoAuth?: string;
-  page?: React.ComponentType<PagePropsType>;
-  pageElement?: React.ReactElement<PagePropsType>;
-  subRoutes?: IRoute[];
+  page?: React.ComponentType;
+  pageElement?: React.ReactElement;
+  subRoutes?: IRoute<IGlobals>[];
+  getPageData?: (globals: IGlobals, params: Record<string, string>) => Promise<unknown | null>;
 }
 
-const routeToReactRoute = (route: IRoute): ReactRouteObject => {
+const routeToReactRoute = <IGlobals, >(route: IRoute<IGlobals>): ReactRouteObject => {
   return {
     path: route.path,
     caseSensitive: false,
@@ -134,17 +135,17 @@ const routeToReactRoute = (route: IRoute): ReactRouteObject => {
         </AuthResolver>
       </ErrorBoundary>
     ),
-    children: route.subRoutes ? route.subRoutes.map((subRoute: IRoute): ReactRouteObject => routeToReactRoute(subRoute)) : [],
+    children: route.subRoutes ? route.subRoutes.map((subRoute: IRoute<IGlobals>): ReactRouteObject => routeToReactRoute(subRoute)) : [],
   };
 };
 
-export interface ISubRouterProps {
-  routes: IRoute[];
+export interface ISubRouterProps<IGlobals> {
+  routes: IRoute<IGlobals>[];
 }
 
-export const SubRouter = (props: ISubRouterProps): React.ReactElement | null => {
+export const SubRouter = <IGlobals, >(props: ISubRouterProps<IGlobals>): React.ReactElement | null => {
   const routes = React.useMemo((): ReactRouteObject[] => {
-    return props.routes.map((route: IRoute): ReactRouteObject => {
+    return props.routes.map((route: IRoute<IGlobals>): ReactRouteObject => {
       return routeToReactRoute(route);
     });
   }, [props.routes]);
@@ -162,12 +163,12 @@ export const SubRouterOutlet = (props: ISubRouterOutletProps): React.ReactElemen
   );
 };
 
-export interface IRouterProps extends ISubRouterProps {
+export interface IRouterProps<IGlobals> extends ISubRouterProps<IGlobals> {
   authManager?: IRouterAuthManager;
   staticPath?: string;
 }
 
-export const Router = (props: IRouterProps): React.ReactElement => {
+export const Router = <IGlobals, >(props: IRouterProps<IGlobals>): React.ReactElement => {
   const internals = (
     <CoreRoutingEnabledContext.Provider value={true}>
       <RouterAuthManagerContext.Provider value={props.authManager}>
