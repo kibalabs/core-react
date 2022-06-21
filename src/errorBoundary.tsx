@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { IMultiAnyChildProps } from './parentComponentProps';
+
 interface IErrorBoundaryState {
   hasError: boolean;
   error: Error | null;
   info: React.ErrorInfo | null;
 }
 
-export interface IErrorBoundaryProps {
+export interface IErrorBoundaryProps extends IMultiAnyChildProps {
 }
 
 const errorStyle = {
