@@ -17,21 +17,6 @@ export const useScrollListener = (element: HTMLElement | Document | Window | nul
   useEventListener(element, 'scroll', handler);
 };
 
-// // export const useEventListener = (element: HTMLElement | Document | Window, eventName: string, handler: (event: Event) => void): void => {
-// //   const savedHandler = React.useRef<(event: Event) => void>(handler);
-
-// //   React.useEffect((): void => {
-// //     savedHandler.current = handler;
-// //   }, [handler]);
-
-// //   React.useEffect((): void => {
-// //     const eventListener = (event: Event): void => savedHandler.current(event);
-// //     element.addEventListener(eventName, eventListener);
-// //     return (): void => {
-// //       element.removeEventListener(eventName, eventListener);
-// //     };
-// //   }, [eventName, element]);
-// // };
 
 export const useScrollListenerRef = <T extends HTMLElement>(handler: (event: Event) => void): React.RefObject<T> => {
   const scrollingRef = React.useRef<T | null>(null);

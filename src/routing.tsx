@@ -163,16 +163,20 @@ export const SubRouterOutlet = (props: ISubRouterOutletProps): React.ReactElemen
   );
 };
 
-export interface IRouterProps<IGlobals> extends ISubRouterProps<IGlobals> {
+export interface IRouterProps<IGlobals> extends IMultiAnyChildProps {
   authManager?: IRouterAuthManager;
   staticPath?: string;
+  routes?: IRoute<IGlobals>[];
 }
 
 export const Router = <IGlobals, >(props: IRouterProps<IGlobals>): React.ReactElement => {
   const internals = (
     <CoreRoutingEnabledContext.Provider value={true}>
       <RouterAuthManagerContext.Provider value={props.authManager}>
-        <SubRouter routes={props.routes} />
+        {props.routes && (
+          <SubRouter routes={props.routes} />
+        )}
+        {props.children}
       </RouterAuthManagerContext.Provider>
     </CoreRoutingEnabledContext.Provider>
   );
