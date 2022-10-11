@@ -1,6 +1,6 @@
 {
   "name": "@kibalabs/core-react",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "Utilities for use in React projects at Kiba Labs",
   "license": "MIT",
   "repository": {

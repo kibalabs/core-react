@@ -10,11 +10,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ### Added
 
 ### Changed
--[MINOR] Allow `Router` to have children and not specify routes
 
 ### Removed
 
-## [0.9.1] - 2022-06-21
+## [0.9.3] - 2022-10-11
+
+### Changed
+-[MINOR] Allow `Router` to have children and not specify routes
+
+## [0.9.2] - 2022-06-21
 
 ### Changed
 -[MAJOR] Update `IRoute` to have `IGlobals` as the first generic prop
