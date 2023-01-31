@@ -1,6 +1,7 @@
 export * from './browserUtil';
 export * from './childrenUtil';
 export * from './errorBoundary';
+export * from './GlobalsContext';
 export * from './routing';
 export * from './parentComponentProps';
 export * from './propsUtil';

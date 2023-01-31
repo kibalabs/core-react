@@ -9,16 +9,6 @@
   },
   "homepage": "https://github.com/kibalabs/core-react",
   "bugs": "https://github.com/kibalabs/core-react/issues",
-  "scripts": {
-    "build": "build-react-component",
-    "start": "build-react-component --start",
-    "start-dev": "build-react-component --start --dev",
-    "clean": "rm -rf ./node_modules ./package-lock.json ./dist",
-    "lint": "lint",
-    "lint-fix": "lint --fix",
-    "type-check": "type-check",
-    "publish-next": "kiba-publish --next"
-  },
   "files": [
     "dist/*"
   ],
