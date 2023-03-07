@@ -10,10 +10,4 @@ export const useWindowScroll = (handler: (sizeScrolled: number, factorScrolled: 
   }, [handler]);
 
   useEventListener(window, 'scroll', onScrolled);
-  // React.useLayoutEffect((): (() => void) => {
-  //   window.addEventListener('scroll', onScrolled);
-  //   return (): void => {
-  //     window.removeEventListener('scroll', onScrolled);
-  //   };
-  // }, [onScrolled]);
 };

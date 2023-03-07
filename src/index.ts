@@ -18,6 +18,7 @@ export * from './usePreviousValue';
 export * from './useRenderedRef';
 export * from './useScrollListener';
 export * from './useSize';
+export * from './useWindowScroll';
 export * from './useWindowSize';
 export * from './useUrlQueryState';
 export * from './useValueSync';
