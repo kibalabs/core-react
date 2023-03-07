@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
+- [MINOR] Added `useWindowScroll`
 
 ### Changed
 
@@ -16,30 +17,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [0.9.3] - 2022-10-11
 
 ### Changed
--[MINOR] Allow `Router` to have children and not specify routes
+- [MINOR] Allow `Router` to have children and not specify routes
 
 ## [0.9.2] - 2022-06-21
 
 ### Changed
--[MAJOR] Update `IRoute` to have `IGlobals` as the first generic prop
--[MINOR] Added `getPageData` to `IRoute`
+- [MAJOR] Update `IRoute` to have `IGlobals` as the first generic prop
+- [MINOR] Added `getPageData` to `IRoute`
 
 ## [0.9.1] - 2022-05-22
 
 ### Changed
--[PATCH] Make `useDateUrlQueryState` SSR safe
+- [PATCH] Make `useDateUrlQueryState` SSR safe
 
 ## [0.9.0] - 2022-04-05
 
 ### Changed
--[MINOR] Updated `IMultiChildProps` to account for lists of lists of children
--[MAJOR] Updated `useScale` props order
--[MAJOR] Updated `useStringListLocalStorageState` props order
+- [MINOR] Updated `IMultiChildProps` to account for lists of lists of children
+- [MAJOR] Updated `useScale` props order
+- [MAJOR] Updated `useStringListLocalStorageState` props order
 
 ## [0.8.0] - 2021-12-26
 
 ### Added
--[MINOR] Added `useRouteParam`, `useStringRouteParam` and `useNumberRouteParam`
+- [MINOR] Added `useRouteParam`, `useStringRouteParam` and `useNumberRouteParam`
 
 ### Changed
 - [MAJOR] Changed `Router` and `SubRouter` to require object form routes instead of children
