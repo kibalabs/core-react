@@ -167,6 +167,7 @@ export interface IRouterProps<IGlobals> extends IMultiAnyChildProps {
   authManager?: IRouterAuthManager;
   staticPath?: string;
   routes?: IRoute<IGlobals>[];
+  basePath?: string;
 }
 
 export const Router = <IGlobals, >(props: IRouterProps<IGlobals>): React.ReactElement => {
@@ -182,11 +183,11 @@ export const Router = <IGlobals, >(props: IRouterProps<IGlobals>): React.ReactEl
   );
 
   return props.staticPath ? (
-    <StaticRouter location={props.staticPath}>
+    <StaticRouter basename={props.basePath} location={props.staticPath}>
       {internals}
     </StaticRouter>
   ) : (
-    <BrowserRouter>
+    <BrowserRouter basename={props.basePath}>
       {internals}
     </BrowserRouter>
   );
