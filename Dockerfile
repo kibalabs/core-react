@@ -12,4 +12,3 @@ RUN make install
 # Build app
 COPY . $WORKDIR
 RUN make build
- 

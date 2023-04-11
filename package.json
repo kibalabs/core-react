@@ -9,11 +9,11 @@
   },
   "homepage": "https://github.com/kibalabs/core-react",
   "bugs": "https://github.com/kibalabs/core-react/issues",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "sideEffects": false,
   "files": [
-    "dist/*"
+    "./dist/**"
   ],
   "dependencies": {
     "@kibalabs/core": "^0.6.0",
