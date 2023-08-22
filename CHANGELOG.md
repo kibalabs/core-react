@@ -8,12 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 ## [Unreleased]
 
 ### Added
-- [MINOR] Added `useWindowScroll`
-- [MINOR] Added `basePath` to `Router`
 
 ### Changed
 
 ### Removed
+
+## [0.9.5] - 2023-08-22
+
+### Added
+- [MINOR] Added `useWindowScroll`
+- [MINOR] Added `basePath` to `Router`
 
 ## [0.9.4] - 2023-04-11
 
