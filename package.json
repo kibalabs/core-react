@@ -16,15 +16,15 @@
     "dist/*"
   ],
   "dependencies": {
-    "@kibalabs/core": "^0.6.2-next.1",
+    "@kibalabs/core": "^0.6.2-next.2",
     "history": "^5.3.0",
-    "react-router": "^6.23.1",
-    "react-router-dom": "^6.23.1",
+    "react-router": "^6.26.1",
+    "react-router-dom": "^6.26.1",
     "react-is": "^18.3.1"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.13.2-next.1",
-    "@types/react": "18.3.2",
+    "@kibalabs/build": "0.13.2-next.8",
+    "@types/react": "18.3.4",
     "@types/react-is": "18.3.0",
     "react": "18.3.1",
     "react-dom": "18.3.1"
