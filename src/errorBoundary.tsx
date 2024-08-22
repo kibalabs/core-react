@@ -8,6 +8,7 @@ interface IErrorBoundaryState {
   info: React.ErrorInfo | null;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IErrorBoundaryProps extends IMultiAnyChildProps {
 }
 
@@ -68,14 +69,14 @@ export class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBo
             <br />
             <br />
             {this.state.error && String(this.state.error)}
-            {this.state.info && this.state.info.componentStack?.split('\n').slice(0, 10).map((message: string, index: number): React.ReactElement => (
-              <span key={index}>
+            {this.state.info && this.state.info.componentStack?.split('\n').slice(0, 10).map((message: string): React.ReactElement => (
+              <span key={message}>
                 {message}
                 <br />
               </span>
             ))}
             <br />
-            <button style={resetButtonStyle} onClick={this.reset}>Reset</button>
+            <button style={resetButtonStyle} onClick={this.reset} type='button'>Reset</button>
           </div>
         </div>
       );

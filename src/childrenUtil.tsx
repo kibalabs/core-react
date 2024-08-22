@@ -3,7 +3,7 @@ import React from 'react';
 import { isFragment } from 'react-is';
 
 // https://github.com/grrowl/react-keyed-flatten-children
-export const flattenChildren = (children: React.ReactNode, depth = 0, keys: (string | number)[] = [], shouldRemoveEmptyStrings = true): React.ReactChild[] => {
+export const flattenChildren = (children: React.ReactNode, depth = 0, keys: (string | number)[] = [], shouldRemoveEmptyStrings = true): (React.ReactElement | string | number)[] => {
   return React.Children.toArray(children).reduce((acc: React.ReactChild[], node: React.ReactNode, nodeIndex: number) => {
     if (isFragment(node)) {
       acc.push(...flattenChildren(node.props.children, depth + 1, keys.concat(node.key || nodeIndex)));

@@ -80,16 +80,16 @@ export interface IRedirectProps {
   shouldReplace?: boolean
 }
 
-export const Redirect = (props: IRedirectProps): React.ReactElement => {
+export function Redirect(props: IRedirectProps): React.ReactElement {
   return <Navigate to={props.target} replace={props.shouldReplace} />;
-};
+}
 
 export interface IAuthResolverProps extends IMultiAnyChildProps {
   redirectIfAuth?: string;
   redirectIfNoAuth?: string;
 }
 
-export const AuthResolver = (props: IAuthResolverProps): React.ReactElement => {
+export function AuthResolver(props: IAuthResolverProps): React.ReactElement {
   const authManager = useRouterAuthManager();
 
   if (props.redirectIfNoAuth) {
@@ -111,7 +111,7 @@ export const AuthResolver = (props: IAuthResolverProps): React.ReactElement => {
   }
 
   return <React.Fragment>{props.children}</React.Fragment>;
-};
+}
 
 export interface IRoute<IGlobals> {
   path: string;
@@ -153,15 +153,16 @@ export const SubRouter = <IGlobals, >(props: ISubRouterProps<IGlobals>): React.R
   return useReactRoutes(routes);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface ISubRouterOutletProps {
 }
 
 // eslint-disable-next-line unused-imports/no-unused-vars
-export const SubRouterOutlet = (props: ISubRouterOutletProps): React.ReactElement => {
+export function SubRouterOutlet(props: ISubRouterOutletProps): React.ReactElement {
   return (
     <Outlet />
   );
-};
+}
 
 export interface IRouterProps<IGlobals> extends IMultiAnyChildProps {
   authManager?: IRouterAuthManager;
@@ -170,7 +171,7 @@ export interface IRouterProps<IGlobals> extends IMultiAnyChildProps {
   basePath?: string;
 }
 
-export const Router = <IGlobals, >(props: IRouterProps<IGlobals>): React.ReactElement => {
+export function Router<IGlobals, >(props: IRouterProps<IGlobals>): React.ReactElement {
   const internals = (
     <CoreRoutingEnabledContext.Provider value={true}>
       <RouterAuthManagerContext.Provider value={props.authManager}>
@@ -191,14 +192,15 @@ export const Router = <IGlobals, >(props: IRouterProps<IGlobals>): React.ReactEl
       {internals}
     </BrowserRouter>
   );
-};
+}
 
 export interface ILinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
   href: string;
 }
 
-export const Link = (props: ILinkProps): React.ReactElement => {
+export function Link(props: ILinkProps): React.ReactElement {
   return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <ReactLink to={props.href} {...props}>{props.children}</ReactLink>
   );
-};
+}
