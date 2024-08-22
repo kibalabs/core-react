@@ -8,7 +8,7 @@ interface IErrorBoundaryState {
   info: React.ErrorInfo | null;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+
 export interface IErrorBoundaryProps extends IMultiAnyChildProps {
 }
 

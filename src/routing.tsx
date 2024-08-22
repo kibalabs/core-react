@@ -153,7 +153,7 @@ export const SubRouter = <IGlobals, >(props: ISubRouterProps<IGlobals>): React.R
   return useReactRoutes(routes);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+
 export interface ISubRouterOutletProps {
 }
 
