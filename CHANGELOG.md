@@ -13,6 +13,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ### Removed
 
+## [0.9.6] - 2024-08-29
+
+### Changed
+- [MINOR] Updated dependencies
+
 ## [0.9.5] - 2023-08-22
 
 ### Added

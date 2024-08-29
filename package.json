@@ -1,6 +1,6 @@
 {
   "name": "@kibalabs/core-react",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "Utilities for use in React projects at Kiba Labs",
   "license": "MIT",
   "repository": {
@@ -16,14 +16,14 @@
     "dist/*"
   ],
   "dependencies": {
-    "@kibalabs/core": "^0.6.2-next.2",
+    "@kibalabs/core": "^0.6.2",
     "history": "^5.3.0",
     "react-router": "^6.26.1",
     "react-router-dom": "^6.26.1",
     "react-is": "^18.3.1"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.13.2-next.8",
+    "@kibalabs/build": "0.13.2",
     "@types/react": "18.3.4",
     "@types/react-is": "18.3.0",
     "react": "18.3.1",
