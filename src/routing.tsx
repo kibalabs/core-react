@@ -1,9 +1,7 @@
 import React from 'react';
 
 import { Location } from 'history';
-import { Navigate, Outlet, useNavigate, useLocation as useReactLocation, useRoutes as useReactRoutes, useParams as useRouterParams } from 'react-router';
-import { BrowserRouter, Link as ReactLink, RouteObject as ReactRouteObject } from 'react-router-dom';
-import { StaticRouter } from 'react-router-dom/server';
+import { BrowserRouter, Navigate, Outlet, Link as ReactLink, RouteObject as ReactRouteObject, StaticRouter, useNavigate, useLocation as useReactLocation, useRoutes as useReactRoutes, useParams as useRouterParams } from 'react-router';
 
 import { ErrorBoundary } from './errorBoundary';
 import { IMultiAnyChildProps } from './parentComponentProps';
