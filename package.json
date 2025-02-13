@@ -9,6 +9,7 @@
   },
   "homepage": "https://github.com/kibalabs/core-react",
   "bugs": "https://github.com/kibalabs/core-react/issues",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "sideEffects": false,
@@ -23,7 +24,7 @@
     "react-router-dom": "^7.1.3"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.13.3-next.0",
+    "@kibalabs/build": "0.13.3-next.3",
     "@types/react": "18.3.4",
     "@types/react-is": "18.3.0",
     "react": "18.3.1",
