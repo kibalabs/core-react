@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Location } from 'history';
-import { BrowserRouter, Navigate, Outlet, Link as ReactLink, RouteObject as ReactRouteObject, StaticRouter, useNavigate, useLocation as useReactLocation, useRoutes as useReactRoutes, useParams as useRouterParams } from 'react-router';
+import { BrowserRouter, Location, Navigate, Outlet, Link as ReactLink, RouteObject as ReactRouteObject, StaticRouter, useNavigate, useLocation as useReactLocation, useRoutes as useReactRoutes, useParams as useRouterParams } from 'react-router';
 
 import { ErrorBoundary } from './errorBoundary';
 import { IMultiAnyChildProps } from './parentComponentProps';

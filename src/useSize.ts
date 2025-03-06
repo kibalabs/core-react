@@ -31,7 +31,7 @@ export const useSize = <T extends HTMLElement>(node: T | null): ISize | null => 
   return size;
 };
 
-export const useSizingRef = <T extends HTMLElement>(): [ISize | null, React.RefObject<T>] => {
+export const useSizingRef = <T extends HTMLElement>(): [ISize | null, React.RefObject<T | null>] => {
   const sizingRef = React.useRef<T | null>(null);
   const size = useSize(sizingRef.current);
   return [size, sizingRef];
