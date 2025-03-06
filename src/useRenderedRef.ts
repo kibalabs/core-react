@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
-export const useRenderedRef = <T extends HTMLElement>(): [React.RefObject<T>, boolean] => {
+export const useRenderedRef = <T extends HTMLElement>(): [React.RefObject<T | null>, boolean] => {
   const ref = React.useRef<T | null>(null);
   const [hasRendered, setHasRendered] = React.useState<boolean>(false);
   useIsomorphicLayoutEffect((): void => {

@@ -18,7 +18,7 @@ export const useScrollListener = (element: HTMLElement | Document | Window | nul
 };
 
 
-export const useScrollListenerRef = <T extends HTMLElement>(handler: (event: Event) => void): React.RefObject<T> => {
+export const useScrollListenerRef = <T extends HTMLElement>(handler: (event: Event) => void): React.RefObject<T | null> => {
   const scrollingRef = React.useRef<T | null>(null);
   // eslint-disable-next-line unused-imports/no-unused-vars
   const [hasLaidOut, setHasLaidOut] = React.useState<boolean>(false);
