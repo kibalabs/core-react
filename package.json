@@ -19,11 +19,11 @@
   "dependencies": {
     "@kibalabs/core": "^0.6.3-next.5",
     "react-is": "^19.0.0",
-    "react-router": "^7.2.0",
-    "react-router-dom": "^7.2.0"
+    "react-router": "^7.3.0",
+    "react-router-dom": "^7.3.0"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.13.3-next.7",
+    "@kibalabs/build": "0.13.3-next.10",
     "@types/react": "19.0.10",
     "@types/react-is": "19.0.0",
     "react": "19.0.0"
