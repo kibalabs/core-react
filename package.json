@@ -18,15 +18,15 @@
   ],
   "dependencies": {
     "@kibalabs/core": "^0.7.1",
-    "react-is": "^19.2.4",
-    "react-router": "^7.13.0",
-    "react-router-dom": "^7.13.0"
+    "react-is": "^19.3.0",
+    "react-router": "^7.18.4",
+    "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
     "@kibalabs/build": "0.14.1",
-    "@types/react": "19.2.10",
-    "@types/react-is": "19.2.0",
-    "react": "19.2.4"
+    "@types/react": "19.3.0",
+    "@types/react-is": "19.3.0",
+    "react": "19.3.0"
   },
   "peerDependencies": {
     "react": "^19.0.0"
