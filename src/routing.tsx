@@ -74,7 +74,7 @@ export const useRouterAuthManager = (): IRouterAuthManager | undefined => {
 
 export interface IRedirectProps {
   target: string;
-  shouldReplace?: boolean
+  shouldReplace?: boolean;
 }
 
 export function Redirect(props: IRedirectProps): React.ReactElement {
