@@ -1,12 +1,12 @@
 export type Point = {
   x: number;
   y: number;
-}
+};
 
 export type PointRange = {
   topLeft: Point;
   bottomRight: Point;
-}
+};
 
 export const ORIGIN_POINT: Point = Object.freeze({ x: 0, y: 0 });
 

@@ -55,17 +55,17 @@ export const useLocalStorageState = (name: string, localStorageClient: LocalStor
 
 export const useBooleanLocalStorageState = (name: string, localStorageClient: LocalStorageClient, overrideInitialValue?: boolean): [boolean | null, (newValue: boolean | null) => void] => {
   const [value, setValue] = useLocalStorageState(name, localStorageClient, booleanToString(overrideInitialValue));
-  return [booleanFromString(value) as boolean | null, ((newValue: boolean | null): void => setValue(booleanToString(newValue) as string | null))];
+  return [booleanFromString(value) as boolean | null, (newValue: boolean | null): void => setValue(booleanToString(newValue) as string | null)];
 };
 
 export const useObjectLocalStorageState = (name: string, localStorageClient: LocalStorageClient, overrideInitialValue?: Record<string, unknown>): [Record<string, unknown> | null, (newValue: Record<string, unknown> | null) => void] => {
   const [value, setValue] = useLocalStorageState(name, localStorageClient, objectToString(overrideInitialValue));
   const [objectValue, setObjectValue] = React.useState<Record<string, unknown> | null>(objectFromString(value) as Record<string, unknown> | null);
-  useValueSync(objectValue, ((newValue: Record<string, unknown> | null): void => setValue(objectToString(newValue) as string | null)));
+  useValueSync(objectValue, (newValue: Record<string, unknown> | null): void => setValue(objectToString(newValue) as string | null));
   return [objectValue, setObjectValue];
 };
 
 export const useStringListLocalStorageState = (name: string, localStorageClient: LocalStorageClient, overrideInitialValue?: string[] | null, delimiter = ','): [string[] | null, (newValue: string[] | null) => void] => {
   const [value, setValue] = useLocalStorageState(name, localStorageClient, stringListToString(overrideInitialValue));
-  return [stringListFromString(value, delimiter) as string[] | null, ((newValue: string[] | null): void => setValue(stringListToString(newValue, delimiter) as string | null))];
+  return [stringListFromString(value, delimiter) as string[] | null, (newValue: string[] | null): void => setValue(stringListToString(newValue, delimiter) as string | null)];
 };

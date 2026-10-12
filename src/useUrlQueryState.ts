@@ -38,7 +38,7 @@ export const useUrlQueryState = (name: string, overrideInitialValue?: string | n
 
 export const useIntegerUrlQueryState = (name: string, overrideInitialValue?: number): [number | null, (newValue: number | null) => void] => {
   const [value, setValue] = useUrlQueryState(name, integerToString(overrideInitialValue));
-  return [integerFromString(value) as number | null, ((newValue: number | null): void => setValue(integerToString(newValue) as string | null))];
+  return [integerFromString(value) as number | null, (newValue: number | null): void => setValue(integerToString(newValue) as string | null)];
 };
 
 const serializeDateToString = (value: Date | null | undefined, format?: string): string | null | undefined => {
@@ -64,5 +64,5 @@ const serializeDateFromString = (value: string | null | undefined, format?: stri
 export const useDateUrlQueryState = (name: string, overrideInitialValue?: Date, format?: string, defaultValue?: Date): [Date | null, (newValue: Date | null) => void] => {
   const [value, setValue] = useUrlQueryState(name, serializeDateToString(overrideInitialValue, format), serializeDateToString(defaultValue, format) as string | undefined);
   const valueMemo = React.useMemo((): Date | null => serializeDateFromString(value, format) as Date | null, [value, format]);
-  return [valueMemo, ((newValue: Date | null): void => setValue(serializeDateToString(newValue, format) as string | null))];
+  return [valueMemo, (newValue: Date | null): void => setValue(serializeDateToString(newValue, format) as string | null)];
 };

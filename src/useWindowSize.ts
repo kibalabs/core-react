@@ -5,7 +5,7 @@ import { useEventListener, useInitialization } from '.';
 export type WindowSize = {
   width: number;
   height: number;
-}
+};
 
 export const useWindowSize = (): WindowSize => {
   const [windowSize, setWindowSize] = React.useState({
