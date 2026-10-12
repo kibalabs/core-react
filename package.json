@@ -17,13 +17,13 @@
     "dist/*"
   ],
   "dependencies": {
-    "@kibalabs/core": "^0.7.1",
+    "@kibalabs/core": "^0.7.2-next.4",
     "react-is": "^19.3.0",
     "react-router": "^7.18.4",
     "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.14.1",
+    "@kibalabs/build": "0.14.2-next.7",
     "@types/react": "19.3.0",
     "@types/react-is": "19.3.0",
     "react": "19.3.0"
