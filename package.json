@@ -17,7 +17,7 @@
     "dist/*"
   ],
   "dependencies": {
-    "@kibalabs/core": "^0.7.2-next.5",
+    "@kibalabs/core": "^0.7.2-next.6",
     "react-is": "^19.3.0",
     "react-router": "^8.4.0"
   },
