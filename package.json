@@ -17,15 +17,15 @@
     "dist/*"
   ],
   "dependencies": {
-    "@kibalabs/core": "^0.7.2-next.7",
-    "react-is": "^19.3.0",
+    "@kibalabs/core": "^0.7.2-next.8",
+    "react-is": "^19.3.1",
     "react-router": "^8.4.0"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.14.2-next.10",
+    "@kibalabs/build": "0.14.2-next.12",
     "@types/react": "19.3.0",
     "@types/react-is": "19.3.0",
-    "react": "19.3.0"
+    "react": "19.3.1"
   },
   "peerDependencies": {
     "react": "^19.0.0"
