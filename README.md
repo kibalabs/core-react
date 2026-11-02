@@ -1,5 +1,10 @@
-# Core-React
+# @kibalabs/core-react
 
-This is Kiba Lab's utility belt for use when creating projects with React.
+**Moved to `@kibalabs/core/react`.** This package is no longer maintained.
 
-For use, see other projects. We will update this README over time :)
+```bash
+npm uninstall @kibalabs/core-react
+npm install @kibalabs/core react react-router
+```
+
+Then replace imports of `@kibalabs/core-react` with `@kibalabs/core/react`.
